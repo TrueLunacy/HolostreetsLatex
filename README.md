@@ -10,22 +10,34 @@ You can override the title image by redefining the `\titleimage` command.
 
 You can change the colour scheme with class options. `blue` and `red` are supported. You can also change the Shadowrun title logo: `logo-5e`, `logo-4e`, `logo-3e`, `logo-2e` and `logo-1e` are all supported, although 1st and 2nd edition use the same logos.
 
+### Commands
 The following commands are defined:
 
 `\tableheader{header}`
+
 `\quality{title}{cost}{details}`
+
 `\adeptpower{title}{cost}{details}` 
+
 `\combatspell{name}{subheader}{spell type}{spell range}{spell damage}{spell duration}{drain value}{content}`
+
 `\spell{name}{subheader}{spell type}{spell range}{spell duration}{drain value}{content}`
+
 `\todo{text}`
+
 `\matrixaction{name}{subheader}{content}`
 
+### Environments
 The following environments are defined:
+
 `chatter` No arguments, formatted with a monospace font e.g Jackpoint chatter.
 
 `srsmalltable` The `table` environment, except preformatted, and taking an additional argument, a header.
+
 `srbigtable` The `table*` environment, except preformatted, and taking an additional argument, a header.
+
 `srsmallbox` The `figure` environment, except preformatted, and taking an additional argument, a header.
+
 `srbigbox` The `figure*` environment, except preformatted, and taking an additional argument, a header.
 
 
