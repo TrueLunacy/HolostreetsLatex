@@ -4,6 +4,8 @@ This is a LaTeX template for Holostreets works inspired by the Shadowrun Single 
 
 ## Use
 
+This package uses the transparent package supported by pdfTeX and LuaTeX, as well as the fontspec package supported by XeTeX and luaTeX. luaTeX is therefore recommended. 
+
 This package overrides the default `\maketitle` and `\tableofcontents` commands. The `\tableofcontents` command will automatically begin numbering after the table of contents. If you don't want to use the table of contents, use `\beginnumbering` to begin numbering.
 
 You can override the title image by redefining the `\titleimage` command.
