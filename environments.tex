@@ -1,0 +1,208 @@
+\newenvironment{chatter}
+{
+    \tt
+}
+{
+}
+
+\newcommand{\tableheader}[1]{
+    \textcolor{corecolor}{\headerfont\MakeUppercase{#1}}
+}
+   
+\newcommand{\quality}[3]{
+    \subsection{#1}
+    \begin{bfseries}
+        #2
+    \end{bfseries}
+    
+    #3
+}
+
+\newcommand{\adeptpower}[3]{
+    \subsection{#1}
+    \begin{FlushLeft}
+    \begin{bfseries}
+        #2
+    \end{bfseries}
+    \end{FlushLeft}
+
+    #3
+}
+
+%- 1st: name
+%- 2nd: type line
+%- 3rd: type
+%- 4th: range
+%- 5th: damage (optional kind of?)
+%- 6th: duration
+%- 7th: drain
+%- 8th - content
+\newcommand{\combatspell}[8]{
+    \undef\headerrule
+    \subsection{#1}
+    \vspace{-\postheaderlength}
+    \def\headerrule{}
+    \begin{FlushLeft}
+        {\small\headerfont#2}
+        \vspace{2pt plus 2pt minus 2pt}
+        \hrule
+        \vspace{2pt plus 2pt minus 2pt}
+        \begin{tabular}{lll}
+            \textbf{Type:} #3     & \textbf{Range:} #4  & \ifstrempty{#5}{}{\textbf{Damage:} #5} \\
+            \textbf{Duration:} #6 & \textbf{Drain:} #7 &           \\
+        \end{tabular}
+    \end{FlushLeft}
+    
+    #8
+}
+
+%- 1st: name
+%- 2nd: type line
+%- 3rd: type
+%- 4th: range
+%- 5th: damage (optional kind of?)
+%- 6th: duration
+%- 7th: drain
+%- 8th - content
+\newcommand{\spell}[7]{
+    \combatspell{#1}{#2}{#3}{#4}{}{#5}{#6}{#7}
+}
+
+%- name
+%- Cost
+%- availability
+%- notes
+\newcommand{\weapon}[4]
+{}
+
+%- name
+%- capacity
+%- Cost
+%- availability
+\newcommand{\sritem}[4]
+{}
+
+%- Name
+%- Features
+%- Armour
+%- Capacity
+%- Cost
+%- Availability
+\newcommand{\featurearmour}[6]
+{}
+
+\newenvironment{itemcategory}[1]
+{}
+{}
+
+%- Name
+%- Armour
+%- Capcity
+%- Cost
+%- Availability
+\newcommand{\armour}[5]
+{}
+
+%- Name
+%- Essence
+%- Capacity
+%- Cost
+%- Availability
+\newcommand{\cyberware}[5]
+{}
+
+%- Name
+%- Essence
+%- Cost
+%- Availability
+\newcommand{\cbioware}[4]
+{}
+
+%- Name
+%- Essence
+%- Capacity
+%- Cost
+%- Availability
+\newcommand{\cyberlimb}[5]
+{}
+
+\newcommand{\todo}[1]{{\color{red}\textbf{TODO: #1}}}
+
+\newcommand{\matrixaction}[3]
+{
+    \subsubsection{#1}
+    \toks0={#1}%
+    \edef\param{\the\toks0}
+    \begin{bfseries}
+        #2
+    \end{bfseries}
+
+    #3
+}
+
+\newenvironment{srsmalltable}[2][h]
+{
+    \begin{table}[#1]
+        \begin{mdframed}[backgroundcolor=tablebackground, hidealllines=true, innertopmargin=12pt, innerbottommargin=12pt]
+            \begin{small}
+            \tableheader{\raggedright\Large #2}
+            
+            \tablefont
+            \medskip
+            \small
+            \rowcolors{1}{tablebackground2}{tablebackground}
+}
+{
+            \end{small}
+        \end{mdframed}
+    \end{table}
+}
+
+\newenvironment{srbigtable}[2][h]
+{
+    \begin{table*}[#1]
+        \begin{mdframed}[backgroundcolor=tablebackground, hidealllines=true, innertopmargin=12pt, innerbottommargin=12pt]
+            \tableheader{\raggedright\Large #2}
+            
+            \tablefont
+            \medskip
+            \small
+            \rowcolors{1}{tablebackground2}{tablebackground}
+}
+{
+        \end{mdframed}
+    \end{table*}
+}
+
+\newenvironment{srsmallbox}[2][h]
+{
+    \begin{figure}[#1]
+        \begin{mdframed}[backgroundcolor=tablebackground, hidealllines=true, innertopmargin=12pt, innerbottommargin=12pt]
+            \begin{small}
+            \tableheader{\raggedright\Large #2}
+            
+            \tablefont
+            \medskip
+            \rowcolors{1}{tablebackground2}{tablebackground}
+}
+{
+            \end{small}
+        \end{mdframed}
+    \end{figure}
+}
+
+\newenvironment{srbigbox}[2][h]
+{
+    \begin{figure*}[#1]
+        \begin{mdframed}[backgroundcolor=tablebackground, hidealllines=true, innertopmargin=12pt, innerbottommargin=12pt]
+            \tableheader{\raggedright\Large #2}
+            
+            \tablefont
+            \medskip
+            \small
+            \rowcolors{1}{tablebackground2}{tablebackground}
+}
+{
+        \end{mdframed}
+    \end{figure*}
+}

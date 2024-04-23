@@ -1,0 +1,7 @@
+- test TitleImage functionality
+- modify chatter to be nicer?
+- just get rid of smalltext, don't need it for that one bit
+
+- implement weapon, sritem, featurearmour, armour, cyberware, etc.
+    - idea of these is that we have a table we can autogenerate with all the stuff
+      in a given category, but I don't know how to make that... yet
