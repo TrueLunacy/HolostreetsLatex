@@ -11,7 +11,7 @@
     paperwidth=216mm,
     inner=20mm,
     outer=15mm,
-    top=30mm,
+    top=32.5mm,
     bottom=20mm
 ]{geometry}
 \RequirePackage{fontspec}
@@ -201,6 +201,7 @@
 
 \setmainfont{Shadowrun}
 \setmonofont{Decker}
+\setmathfont{Latin Modern Math}
 \newfontfamily\headerfont{Mustica Pro Semi-Bold}
 \newfontfamily\tablefont{Creato Display}
 
