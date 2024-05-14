@@ -201,7 +201,6 @@
 
 \setmainfont{Shadowrun}
 \setmonofont{Decker}
-\setmathfont{Latin Modern Math}
 \newfontfamily\headerfont{Mustica Pro Semi-Bold}
 \newfontfamily\tablefont{Creato Display}
 
