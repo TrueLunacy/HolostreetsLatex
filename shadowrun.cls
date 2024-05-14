@@ -81,6 +81,12 @@
     \def\logo{SR6 logo-blue.png}
 }
 
+\DeclareOption{no-images}
+{
+    \colorlet{chaptercolor}{black}
+    \def\noimage
+}
+
 % default logo SR6
 \def\titlelogo{logos/Shadowrun 6 Logo.png}
 
@@ -109,16 +115,27 @@
     \ifodd\LastMark{drawBackground}
     \begin{tikzpicture}
         \node (background) at (0, 0) {%
-        \ifodd\value{page}
-        \includegraphics[width=\paperwidth,height=\paperheight]{background-left.png}
-        \else
-        \includegraphics[width=\paperwidth,height=\paperheight]{background-right.png}
+        \ifx\noimage\undefined
+            \ifodd\value{page}
+            \includegraphics[width=\paperwidth,height=\paperheight]{background-left.png}
+            \else
+            \includegraphics[width=\paperwidth,height=\paperheight]{background-right.png}
+            \fi
         \fi
         };
         \begin{pgfinterruptboundingbox}
             \ifodd\FirstMark{isChapter}
-                \node (chapter) [below=0cm of background.north] {\includegraphics[width=\paperwidth]{chapter-intro.png}};
-                \node (logo) [above right=1.8cm and (1in + \hoffset + \oddsidemargin + 0.5\textwidth)-6cm of chapter.south west]{{\transparent{0.4}\includegraphics[width=12cm]{\logo}}};
+                \node (chapter) [below=0cm of background.north] 
+                {
+                    \ifx\noimage\undefined
+                        \includegraphics[width=\paperwidth]{chapter-intro.png}
+                    \fi
+                };
+                \ifx\noimage\undefined
+                    \node (logo) [above right=1.8cm and (1in + \hoffset + \oddsidemargin + 0.5\textwidth)-6cm of chapter.south west]{{\transparent{0.4}\includegraphics[width=12cm]{\logo}}};
+                \else
+                    \node (logo) at (0, 0) {};                
+                \fi
                 \node (chaptertext) [align=center, above=1.5cm+20pt of logo.south] {\color{chaptercolor}\fontsize{60pt}{70pt}\headerfont\MakeUppercase{\FirstMark{chapter}}};
                 \node (bottom_left) [shape=coordinate, below left=0.3cm+4pt and 2cm of chaptertext.south west] {};
                 \node (bottom_right) [shape=coordinate, below right=0.3cm and 2cm of chaptertext.south east] {};
@@ -127,8 +144,18 @@
                 \fill [pattern color=corecolor, pattern=crosshatch] (bottom_left) rectangle (bottom_right);
                 \fill [pattern color=corecolor, pattern=crosshatch] (top_left) rectangle(top_right);
             \else
-                \node (chapter) [below=-12.5cm of background.north] {\includegraphics[width=\paperwidth]{chapter-intro.png}};
-                \node (logo) [above right=-0.8cm and 1cm of chapter.south west]{\includegraphics[width=4cm]{\logo}};
+                \node (chapter) [below=-12.5cm of background.north] 
+                {
+                    \ifx\noimage\undefined
+                        \includegraphics[width=\paperwidth]{chapter-intro.png}
+                    \fi
+                };
+                \node (logo) [above right=-0.8cm and 1cm of chapter.south west]
+                {
+                    \ifx\noimage\undefined
+                        \includegraphics[width=4cm]{\logo}
+                    \fi
+                };
                 \ifodd\LastMark{drawPageNumber}
                     \node (pageanchor) [shape=coordinate, above left=2.3cm and 2.5cm of chapter.south east]{};
                     \draw [color=corecolor, line width=1pt] (pageanchor) -- ++(0, -1.12) -- ++(-2.04,0) -- ++(0, 1.52) -- ++(1.66, 0) -- (pageanchor);
@@ -142,20 +169,38 @@
     \else
     \begin{tikzpicture}
         \node (background) at (0, 0) {%
-            \includegraphics[width=\paperwidth, height=\paperheight]{frontpage.png}
+            \ifx\noimage\undefined
+                \includegraphics[width=\paperwidth, height=\paperheight]{frontpage.png}
+            \fi
         };
         \node (title) [below=1cm of background.north] {%
-            \includegraphics[width=\paperwidth]{\titlelogo}
+            \ifx\noimage\undefined
+                \includegraphics[width=\paperwidth]{\titlelogo}
+            \else
+                \fontsize{80pt}{100pt}\headerfont\color{black}SHADOWRUN\vspace{40pt}
+            \fi
         };
         \node (holostreets) [above=1.5cm of background.south] {%
-            \includegraphics[width=12cm]{holostreets.png}
+            \ifx\noimage\undefined
+                \includegraphics[width=12cm]{holostreets.png}
+            \fi
         };
         \node (legaltext) [below=0cm of holostreets.south] {
-            \parbox{16cm}{\centering\footnotesize\color{gray}Shadowrun, Sixth World, and Matrix, and associated graphics and logos are registered trademarks and/or trademarks of The Topps Company, Inc., in the United States and/or other countries. Catalyst Game Labs and the Catalyst Game Labs logo are trademarks of InMediaRes Productions, LLC.}
+            \ifx\noimage\undefined
+                \parbox{16cm}{\centering\footnotesize\color{gray}Shadowrun, Sixth World, and Matrix, and associated graphics and logos are registered trademarks and/or trademarks of The Topps Company, Inc., in the United States and/or other countries. Catalyst Game Labs and the Catalyst Game Labs logo are trademarks of InMediaRes Productions, LLC.}
+            \else
+                \parbox{16cm}{\centering This document is in NO IMAGES MODE. You probably shouldn't publish it as-is.}
+            \fi
         };
         \node (titletext) [below=0cm of title.south] {%
             \parbox{20cm}{
-                \centering\fontsize{40pt}{60pt}\headerfont\color{white}\MakeUppercase{\thetitle}
+                \centering\fontsize{40pt}{60pt}\headerfont
+                \ifx\noimage\undefined
+                    \color{white}
+                \else
+                    \color{black}
+                \fi
+                \MakeUppercase{\thetitle}
             }
         };
         \ifdefined\titleimage
@@ -163,7 +208,9 @@
             \node (top) [shape=coordinate, below=0.5cm of titletext.south] {};
             \pgfextracty{\titleimageheight}{\pgfpointdiff{\pgfpointanchor{bottom}{center}}{\pgfpointanchor{top}{center}}}
             \node (titlelogo) [below=0.5cm of top] {%
-                \includegraphics[height=\titleimageheight]{\titleimage}
+                \ifx\noimage\undefined
+                    \includegraphics[height=\titleimageheight]{\titleimage}
+                \fi
             };
         \fi
     \end{tikzpicture}
