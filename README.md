@@ -13,7 +13,7 @@ You can override the title image by redefining the `\titleimage` command.
 You can change the colour scheme, Shadowrun title logo, and/or font setup with class options:
 
 - For colour schemes, `purple`, `blue`, and `red` are supported.
-- For the Shadowrun title logo, `logo-6e`, `logo-5e`, `logo-4e`, `logo-3e`, `logo-2e` and `logo-1e` are all supported, although 1st and 2nd edition use the same logos.
+- For the Shadowrun title logo, `logo-6e`, `logo-5e`, `logo-4e`, `logo-3e`, `logo-2e`, and `logo-1e` are all supported. Note that `logo-2e` and `logo-1e` use the same logos.
 - For the font setup, `font-6e` and `font-5e` are supported.
 
 If no options are specified, the default options are `purple`, `logo-6e`, and `font-6e`.
