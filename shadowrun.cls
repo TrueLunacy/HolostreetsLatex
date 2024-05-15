@@ -57,13 +57,15 @@
 \definecolor{tablebackground}{RGB}{235, 234, 229}
 \definecolor{tablebackground2}{RGB}{224, 224, 217}
 
-%- default purple theme
-\colorlet{corecolor}{srpurple}
-\colorlet{chaptercolor}{white}
-\colorlet{sectioncolor}{srpurple}
-\colorlet{subsectioncolor}{black}
-\def\logo{SR6 logo.png}
-
+\DeclareOption{purple}
+{
+	%- default purple theme
+	\colorlet{corecolor}{srpurple}
+	\colorlet{chaptercolor}{white}
+	\colorlet{sectioncolor}{srpurple}
+	\colorlet{subsectioncolor}{black}
+	\def\logo{SR6 logo.png}
+}
 \DeclareOption{red}
 {
     \colorlet{corecolor}{srred}
@@ -87,16 +89,27 @@
     \def\noimage
 }
 
-% default logo SR6
-\def\titlelogo{logos/Shadowrun 6 Logo.png}
-
+\DeclareOption{logo-6e}{\def\titlelogo{logos/Shadowrun 6 Logo.png}} % default logo SR6
 \DeclareOption{logo-5e}{\def\titlelogo{logos/Shadowrun 5 Logo.png}}
 \DeclareOption{logo-4e}{\def\titlelogo{logos/Shadowrun 4 Logo.png}}
 \DeclareOption{logo-3e}{\def\titlelogo{logos/Shadowrun 3 Logo.png}}
 \DeclareOption{logo-2e}{\def\titlelogo{logos/Shadowrun 1-2 Logo.png}}
 \DeclareOption{logo-1e}{\def\titlelogo{logos/Shadowrun 1-2 Logo.png}}
 
+\setmainfont{Shadowrun}
+\setmonofont{Decker}
+\DeclareOption{font-6e}{ % Mimicking default SR6 fonts
+	\setfontfamily\headerfont{Mustica Pro Semi-Bold}
+	\setfontfamily\tablefont{Creato Display}
+}
+\DeclareOption{font-5e}{
+	\setfontfamily\headerfont{Squares Bold}
+	\setfontfamily\tablefont{Univers Condensed Bold}
+}
+
 \DeclareOption*{\PackageWarning{shadowrun}{Unknown ‘\CurrentOption’}}
+
+\ExecuteOptions{purple,logo-6e,font-6e}
 
 \renewcommand\arraystretch{1.2}
 
@@ -245,11 +258,6 @@
    }{%
    \endtrivlist%
 }
-
-\setmainfont{Shadowrun}
-\setmonofont{Decker}
-\newfontfamily\headerfont{Mustica Pro Semi-Bold}
-\newfontfamily\tablefont{Creato Display}
 
 \def\headerrule{}
 \newlength{\postheaderlength}

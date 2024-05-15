@@ -10,7 +10,13 @@ This package overrides the default `\maketitle` and `\tableofcontents` commands.
 
 You can override the title image by redefining the `\titleimage` command.
 
-You can change the colour scheme with class options. `blue` and `red` are supported. You can also change the Shadowrun title logo: `logo-5e`, `logo-4e`, `logo-3e`, `logo-2e` and `logo-1e` are all supported, although 1st and 2nd edition use the same logos.
+You can change the colour scheme, Shadowrun title logo, and/or font setup with class options:
+
+- For colour schemes, `purple`, `blue`, and `red` are supported.
+- For the Shadowrun title logo, `logo-6e`, `logo-5e`, `logo-4e`, `logo-3e`, `logo-2e` and `logo-1e` are all supported, although 1st and 2nd edition use the same logos.
+- For the font setup, `font-6e` and `font-5e` are supported.
+
+If no options are specified, the default options are `purple`, `logo-6e`, and `font-6e`.
 
 ### Commands
 The following commands are defined:
@@ -48,7 +54,7 @@ The sty file requires the following LaTeX packages: anyfontsize, array, backgrou
 
 All of these packages are available on CTAN and are included in the default Arch Linux TeX live distribution.
 
-Certain fonts must be acquired. The Shadowrun and Decker font is used for main text and can be acquired [here](https://rpg.divnull.com/srun/fonts.html). The Creato Display font is used for tables, and can be acquired [here](https://www.dafont.com/creato-display.font). The Mustica Pro font is used for headings, and can be acquired [here](https://www.dafont.com/mustica-pro.font).
+Certain fonts must be acquired. The Shadowrun and Decker fonts are used for main text and can be acquired [here](https://rpg.divnull.com/srun/fonts.html). If you are using `font-6e`, which is also the default option if no alternative font option is specified, the Creato Display font is used for tables, which can be acquired [here](https://www.dafont.com/creato-display.font), and the Mustica Pro font is used for headings, which can be acquired [here](https://www.dafont.com/mustica-pro.font). If you are using `font-5e`, the Univers Condensed Bold font is used for tables, which comes with Windows by default and can also be acquired [here](https://font.download/font/univers-condensed), and the Squares Bold font is used for headings, which can be acquired [here](https://www.1001fonts.com/squares-bold-font.html).
 
 ## Assets
 This project uses assets from the Holostreets Shadowrun [Editions Logo Pack](https://drivethrurpg.com/product/433897/shadowrun-holostreets-shadowrun-editions-logo-pack), and the Shadowrun [Single Page Template](https://drivethrurpg.com/product/431512/shadowrun-holostreets-single-page-template). Some of these assets have been modified.
