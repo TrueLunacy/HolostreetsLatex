@@ -33,6 +33,7 @@
 \RequirePackage{tabularx}
 \RequirePackage{setspace}
 \RequirePackage{stfloats}
+\RequirePackage{atbegshi}
 
 \renewcommand{\topfraction}{.85}
 \renewcommand{\bottomfraction}{.7}
@@ -328,15 +329,19 @@
 
 
 
-\renewcommand{\maketitle}
+\renewcommand*{\maketitle}
 {
-	\thispagestyle{titlepage}
-	\InsertMark{drawPageNumber}{0}
-	\InsertMark{drawBackground}{0}
-	\null
-	\clearpage
-	\InsertMark{drawBackground}{1}
-	\InsertMark{drawPageNumber}{1}
+    \begin{titlepage}
+    	\thispagestyle{titlepage}
+    	\InsertMark{drawPageNumber}{0}
+    	\InsertMark{drawBackground}{0}
+    	\null
+    	\clearpage
+    	\InsertMark{drawBackground}{1}
+    	\InsertMark{drawPageNumber}{1}
+    \end{titlepage}
+
+    \AtBeginShipoutNext{\AtBeginShipoutDiscard}
 }
 
 \pretocmd{\tableofcontents}
