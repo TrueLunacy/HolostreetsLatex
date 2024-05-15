@@ -318,7 +318,7 @@
     	\fancyfoot[RE]{\headerfont\color{corecolor}\MakeUppercase{\large\LastMark{section}\space//\space\normalsize\FirstMark{chapter}}}
 	}
 	
-	\fancypagestyle{titlepage}[fancy]
+	\fancypagestyle{titlepage}[plain]
 	{
 		\fancyhf{}
 	}
