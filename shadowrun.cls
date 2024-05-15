@@ -162,17 +162,17 @@
                     \fi
                 };
                 \ifx\noimage\undefined
-                    \node (logo) [above right=1.8cm and (1in + \hoffset + \oddsidemargin + 0.5\textwidth)-6cm of chapter.south west]{{\transparent{0.4}\includegraphics[width=12cm]{\logo}}};
+                    \node (logo) [below=2.5cm of chapter.north]{{\includegraphics[height=10.5cm]{\logo}}};
                 \else
                     \node (logo) at (0, 0) {};
                 \fi
-                \node (chaptertext) [align=center, above=1.5cm+20pt of logo.south] {\color{chaptercolor}\fontsize{60pt}{70pt}\headerfont\MakeUppercase{\FirstMark{chapter}}};
-                \node (bottom_left) [shape=coordinate, below left=0.3cm+4pt and 2cm of chaptertext.south west] {};
-                \node (bottom_right) [shape=coordinate, below right=0.3cm and 2cm of chaptertext.south east] {};
-                \node (top_left) [shape=coordinate, above left=0.3cm+4pt and 2cm of chaptertext.north west] {};
-                \node (top_right) [shape=coordinate, above right=0.3cm and 2cm of chaptertext.north east] {};
-                \fill [pattern color=corecolor, pattern=crosshatch] (bottom_left) rectangle (bottom_right);
-                \fill [pattern color=corecolor, pattern=crosshatch] (top_left) rectangle(top_right);
+                \node (chaptertext) [align=center, above=-0.1cm of logo.south, text width=13cm] {\color{chaptercolor}\fontsize{60pt}{70pt}\headerfont\MakeUppercase{\FirstMark{chapter}}};
+                \node (bottom_left) [shape=coordinate, below left=0.5cm+3pt and 0cm of chaptertext.south west] {};
+                \node (bottom_right) [shape=coordinate, below right=0.5cm and 0cm of chaptertext.south east] {};
+                \node (top_left) [shape=coordinate, above left=0.5cm+3pt and 0cm of chaptertext.north west] {};
+                \node (top_right) [shape=coordinate, above right=0.5cm and 0cm of chaptertext.north east] {};
+                \fill [pattern color=corecolor, pattern=north east lines] (bottom_left) rectangle (bottom_right);
+                \fill [pattern color=corecolor, pattern=north east lines] (top_left) rectangle(top_right);
             \else
                 \node (chapter) [below=-12.5cm of background.north]
                 {
