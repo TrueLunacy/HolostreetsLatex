@@ -14,9 +14,9 @@ You can change the colour scheme, Shadowrun title logo, and/or font setup with c
 
 - For colour schemes, `purple`, `blue`, and `red` are supported.
 - For the Shadowrun title logo, `logo-6e`, `logo-5e`, `logo-4e`, `logo-3e`, `logo-2e`, and `logo-1e` are all supported. Note that `logo-2e` and `logo-1e` use the same logos.
-- For the font setup, `font-6e` and `font-5e` are supported.
+- For the font setup, `font-6e`, `font-6e-freealt`, `font-5e`, and `font-5e-freealt` are supported.
 
-If no options are specified, the default options are `purple`, `logo-6e`, and `font-6e`.
+If no options are specified, the default options are `purple`, `logo-6e`, and `font-6e-freealt`.
 
 ### Commands
 
@@ -56,7 +56,21 @@ The sty file requires the following LaTeX packages: anyfontsize, array, backgrou
 
 All of these packages are available on CTAN and are included in the default Arch Linux TeX live distribution.
 
-Certain fonts must be acquired. The Shadowrun and Decker fonts are used for main text and can be acquired [here](https://rpg.divnull.com/srun/fonts.html). If you are using `font-6e`, which is also the default option if no alternative font option is specified, the Creato Display font is used for tables, which can be acquired [here](https://www.dafont.com/creato-display.font), and the Mustica Pro font is used for headings, which can be acquired [here](https://www.dafont.com/mustica-pro.font). If you are using `font-5e`, the Univers Condensed Bold font is used for tables, which comes with Windows by default and can also be acquired [here](https://font.download/font/univers-condensed), and the Squares Bold font is used for headings, which can be acquired [here](https://www.1001fonts.com/squares-bold-font.html).
+Certain fonts must be acquired externally:
+
+- The Shadowrun and Decker fonts are used for main text for all font options. They can both be acquired [here](https://rpg.divnull.com/srun/fonts.html).
+- If you are using `font-6e`, the Amplitude Medium font is used for tables, the Njord Regular font is used for headings, and the Njord Alternate font is used for the main title.
+  - Amplitude Medium can be purchased for commercial use [here](https://store.typenetwork.com/foundry/fontbureau/fonts/amplitude) and is also available through Adobe Creative Cloud [here](https://fonts.adobe.com/fonts/amplitude).
+  - Njord Regular and Njord Alternate can be purchased for commercial use [here](https://www.tugcu.co/fonts/p/njord).
+- If you are using `font-6e-freealt`, which is also the default option if no alternative font option is specified, the Creato Display font is used for tables, and the Mustica Pro font is used for headings.
+  - Creato Display can be acquired for free for commercial use [here](https://www.dafont.com/creato-display.font).
+  - Mustica Pro can be acquired for free for commercial use [here](https://www.dafont.com/mustica-pro.font).
+- If you are using `font-5e`, the Univers Condensed Bold font is used for tables, and the Armadura Solid font is used for headings.
+  - Univers Condensed Bold comes with Windows by default and can also be acquired for free for commercial use [here](https://font.download/font/univers-condensed).
+  - Armadura Solid can be purchased for commercial use [here](https://www.myfonts.com/products/solid-armadura-177401).
+- If you are using `font-5e-freealt`, the Univers Condensed Bold font is used for tables, and the Squares Bold font is used for headings.
+  - Univers Condensed Bold comes with Windows by default and can also be acquired for free for commercial use [here](https://font.download/font/univers-condensed).
+  - Squares Bold can be acquired for free for commercial use [here](https://www.1001fonts.com/squares-bold-font.html).
 
 ## Assets
 

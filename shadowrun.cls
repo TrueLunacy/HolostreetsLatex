@@ -98,18 +98,30 @@
 
 \setmainfont{Shadowrun}
 \setmonofont{Decker}
-\DeclareOption{font-6e}{ % Mimicking default SR6 fonts
+\DeclareOption{font-6e-freealt}{ % Mimicking default SR6 fonts
+	\setfontfamily\titlefont{Mustica Pro Semi-Bold}
 	\setfontfamily\headerfont{Mustica Pro Semi-Bold}
 	\setfontfamily\tablefont{Creato Display}
 }
-\DeclareOption{font-5e}{
+\DeclareOption{font-6e}{
+	\setfontfamily\titlefont{Njord Alternate}
+	\setfontfamily\headerfont{Njord Regular}
+	\setfontfamily\tablefont{Amplitude Medium}
+}
+\DeclareOption{font-5e-freealt}{
+	\setfontfamily\titlefont{Squares Bold}
 	\setfontfamily\headerfont{Squares Bold}
+	\setfontfamily\tablefont{Univers Condensed Bold}
+}
+\DeclareOption{font-5e}{
+	\setfontfamily\titlefont{Armadura Solid}
+	\setfontfamily\headerfont{Armadura Solid}
 	\setfontfamily\tablefont{Univers Condensed Bold}
 }
 
 \DeclareOption*{\PackageWarning{shadowrun}{Unknown ‘\CurrentOption’}}
 
-\ExecuteOptions{purple,logo-6e,font-6e}
+\ExecuteOptions{purple,logo-6e,font-6e-freealt}
 
 \renewcommand\arraystretch{1.2}
 
@@ -207,7 +219,7 @@
         };
         \node (titletext) [below=0cm of title.south] {%
             \parbox{20cm}{
-                \centering\fontsize{40pt}{60pt}\headerfont
+                \centering\fontsize{40pt}{60pt}\titlefont
                 \ifx\noimage\undefined
                     \color{white}
                 \else
