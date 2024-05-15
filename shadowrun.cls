@@ -89,6 +89,8 @@
     \def\noimage
 }
 
+\DeclareOption{no-cgl}{\def\nocgllogo}
+
 \DeclareOption{logo-6e}{\def\titlelogo{logos/Shadowrun 6 Logo.png}} % default logo SR6
 \DeclareOption{logo-5e}{\def\titlelogo{logos/Shadowrun 5 Logo.png}}
 \DeclareOption{logo-4e}{\def\titlelogo{logos/Shadowrun 4 Logo.png}}
@@ -130,6 +132,8 @@
 \newcommand{\TitleImage}[1]{\def\titleimage{#1}}
 
 \newdimen\titleimageheight
+
+\newcommand{\shadowrunlegaltext}{Shadowrun, Sixth World, and Matrix, and associated graphics and logos are registered trademarks and/or trademarks of The Topps Company, Inc., in the United States and/or other countries. Catalyst Game Labs and the Catalyst Game Labs logo are trademarks of InMediaRes Productions, LLC.}
 
 \backgroundsetup{
     scale=1, 
@@ -202,22 +206,33 @@
             \ifx\noimage\undefined
                 \includegraphics[width=\paperwidth]{\titlelogo}
             \else
-                \fontsize{80pt}{100pt}\headerfont\color{black}SHADOWRUN\vspace{40pt}
+                \fontsize{80pt}{100pt}\titlefont\color{black}SHADOWRUN\vspace{40pt}
             \fi
         };
-        \node (holostreets) [above=1.5cm of background.south] {%
+        \node (holostreets) [above=1.4075cm of background.south] {%
             \ifx\noimage\undefined
                 \includegraphics[width=12cm]{holostreets.png}
             \fi
         };
-        \node (legaltext) [below=0cm of holostreets.south] {
-            \ifx\noimage\undefined
-                \parbox{16cm}{\centering\footnotesize\color{gray}Shadowrun, Sixth World, and Matrix, and associated graphics and logos are registered trademarks and/or trademarks of The Topps Company, Inc., in the United States and/or other countries. Catalyst Game Labs and the Catalyst Game Labs logo are trademarks of InMediaRes Productions, LLC.}
-            \else
-                \parbox{16cm}{\centering This document is in NO IMAGES MODE. You probably shouldn't publish it as-is.}
-            \fi
-        };
-        \node (titletext) [below=0cm of title.south] {%
+        \ifx\noimage\undefined
+        	\ifx\nocgllogo\undefined
+		        \node (legaltext) [below right=-0.25cm and 1cm of holostreets.south west] {
+		            \parbox{13.5cm}{\footnotesize\color{gray}\shadowrunlegaltext}
+		        };
+		        \node (catalystlogo) [above right=0.4675cm and 2.2cm of background.south west] {
+		        	\includegraphics[width=2.2cm]{Catalyst Logo Revised July 2009.png}
+		        };
+		    \else
+		    	\node (legaltext) [below=-0.25cm of holostreets.south] {
+		    		\parbox{16cm}{\centering \footnotesize\color{gray}\shadowrunlegaltext}
+		    	};
+		    \fi
+        \else
+	        \node (legaltext) [below=-0.25cm of holostreets.south] {
+	        	\parbox{16cm}{\centering This document is in NO IMAGES MODE. You probably shouldn't publish it as-is.}
+	        };
+        \fi
+        \node (titletext) [below=-1cm of title.south] {%
             \parbox{20cm}{
                 \centering\fontsize{40pt}{60pt}\titlefont
                 \ifx\noimage\undefined
@@ -229,10 +244,10 @@
             }
         };
         \ifdefined\titleimage
-            \node (bottom) [shape=coordinate, below=0cm of holostreets.north] {};
-            \node (top) [shape=coordinate, below=0.5cm of titletext.south] {};
+            \node (bottom) [shape=coordinate, below=0.5cm of holostreets.north] {};
+            \node (top) [shape=coordinate, below=0.2cm of titletext.south] {};
             \pgfextracty{\titleimageheight}{\pgfpointdiff{\pgfpointanchor{bottom}{center}}{\pgfpointanchor{top}{center}}}
-            \node (titlelogo) [below=0.5cm of top] {%
+            \node (titlelogo) [below=0.2cm of top] {%
                 \ifx\noimage\undefined
                     \includegraphics[height=\titleimageheight]{\titleimage}
                 \fi
@@ -296,24 +311,32 @@
     \InsertMark{drawBackground}{1}
     \InsertMark{drawPageNumber}{0}
 
-    \fancyhead{}
-    \fancyfoot{}
-    \fancyfoot[LO]{\headerfont\color{corecolor}\MakeUppercase{\FirstMark{chapter}\space//\space\large\LastMark{section}}}
-    \fancyfoot[RE]{\headerfont\color{corecolor}\MakeUppercase{\large\LastMark{section}\space//\space\normalsize\FirstMark{chapter}}}
+	\fancypagestyle{plain}
+	{
+    	\fancyhf{}
+    	\fancyfoot[LO]{\headerfont\color{corecolor}\MakeUppercase{\FirstMark{chapter}\space//\space\large\LastMark{section}}}
+    	\fancyfoot[RE]{\headerfont\color{corecolor}\MakeUppercase{\large\LastMark{section}\space//\space\normalsize\FirstMark{chapter}}}
+	}
+	
+	\fancypagestyle{titlepage}[fancy]
+	{
+		\fancyhf{}
+	}
 
-    \pagestyle{fancy}
+    \pagestyle{plain}
 }
 
 
 
 \renewcommand{\maketitle}
 {
-\InsertMark{drawPageNumber}{0}
-\InsertMark{drawBackground}{0}
-\null
-\clearpage
-\InsertMark{drawBackground}{1}
-\InsertMark{drawPageNumber}{1}
+	\thispagestyle{titlepage}
+	\InsertMark{drawPageNumber}{0}
+	\InsertMark{drawBackground}{0}
+	\null
+	\clearpage
+	\InsertMark{drawBackground}{1}
+	\InsertMark{drawPageNumber}{1}
 }
 
 \pretocmd{\tableofcontents}

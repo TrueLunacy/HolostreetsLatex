@@ -10,6 +10,8 @@ This package overrides the default `\maketitle` and `\tableofcontents` commands.
 
 You can override the title image by redefining the `\titleimage` command.
 
+You can remove the logo for Catalyst Game Labs from the title page by using the `no-cgl` class option.
+
 You can change the colour scheme, Shadowrun title logo, and/or font setup with class options:
 
 - For colour schemes, `purple`, `blue`, and `red` are supported.
