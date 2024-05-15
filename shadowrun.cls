@@ -14,7 +14,7 @@
     top=32.5mm,
     bottom=20mm
 ]{geometry}
-\RequirePackage{fontspec}
+\RequirePackage[no-math]{fontspec}
 \RequirePackage{background}
 \RequirePackage{etoc}
 \RequirePackage{tikz}
