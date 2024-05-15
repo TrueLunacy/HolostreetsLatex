@@ -136,7 +136,7 @@
 \newcommand{\shadowrunlegaltext}{Shadowrun, Sixth World, and Matrix, and associated graphics and logos are registered trademarks and/or trademarks of The Topps Company, Inc., in the United States and/or other countries. Catalyst Game Labs and the Catalyst Game Labs logo are trademarks of InMediaRes Productions, LLC.}
 
 \backgroundsetup{
-    scale=1, 
+    scale=1,
     opacity=1,
     angle=0,
     color=black,
@@ -154,7 +154,7 @@
         };
         \begin{pgfinterruptboundingbox}
             \ifodd\FirstMark{isChapter}
-                \node (chapter) [below=0cm of background.north] 
+                \node (chapter) [below=0cm of background.north]
                 {
                     \ifx\noimage\undefined
                         \includegraphics[width=\paperwidth]{chapter-intro.png}
@@ -163,7 +163,7 @@
                 \ifx\noimage\undefined
                     \node (logo) [above right=1.8cm and (1in + \hoffset + \oddsidemargin + 0.5\textwidth)-6cm of chapter.south west]{{\transparent{0.4}\includegraphics[width=12cm]{\logo}}};
                 \else
-                    \node (logo) at (0, 0) {};                
+                    \node (logo) at (0, 0) {};
                 \fi
                 \node (chaptertext) [align=center, above=1.5cm+20pt of logo.south] {\color{chaptercolor}\fontsize{60pt}{70pt}\headerfont\MakeUppercase{\FirstMark{chapter}}};
                 \node (bottom_left) [shape=coordinate, below left=0.3cm+4pt and 2cm of chaptertext.south west] {};
@@ -173,7 +173,7 @@
                 \fill [pattern color=corecolor, pattern=crosshatch] (bottom_left) rectangle (bottom_right);
                 \fill [pattern color=corecolor, pattern=crosshatch] (top_left) rectangle(top_right);
             \else
-                \node (chapter) [below=-12.5cm of background.north] 
+                \node (chapter) [below=-12.5cm of background.north]
                 {
                     \ifx\noimage\undefined
                         \includegraphics[width=\paperwidth]{chapter-intro.png}
@@ -279,7 +279,7 @@
 
 \renewenvironment{FlushLeft}{%
    \topsep=0pt
-   \partopsep=0pt 
+   \partopsep=0pt
    \trivlist%
    \RaggedRight\item\relax
    }{%
@@ -317,7 +317,7 @@
     	\fancyfoot[LO]{\headerfont\color{corecolor}\MakeUppercase{\FirstMark{chapter}\space//\space\large\LastMark{section}}}
     	\fancyfoot[RE]{\headerfont\color{corecolor}\MakeUppercase{\large\LastMark{section}\space//\space\normalsize\FirstMark{chapter}}}
 	}
-	
+
 	\fancypagestyle{titlepage}[plain]
 	{
 		\fancyhf{}
@@ -352,6 +352,6 @@
 
 \newcommand{\beginnumbering}
 {
-    \InsertMark{drawPageNumber}{1}    
+    \InsertMark{drawPageNumber}{1}
     \setcounter{page}{1}
 }
