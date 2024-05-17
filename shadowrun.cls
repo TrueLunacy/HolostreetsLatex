@@ -319,8 +319,8 @@
         \begin{pgfonlayer}{titleimage}
             \ifdefined\titleimage
                 \ifdefined\titlepageseamless
-                    \node (bottom) [shape=coordinate, below=4cm of holostreets.north] {};
-                    \node (top) [shape=coordinate, below=0cm of title.south] {};
+                    \node (bottom) [shape=coordinate, below=2.5cm of holostreets.north] {};
+                    \node (top) [shape=coordinate, below=1cm of titletext.north] {};
                     \pgfextracty{\titleimageheight}{\pgfpointdiff{\pgfpointanchor{bottom}{center}}{\pgfpointanchor{top}{center}}}
                     \node (titlelogo) [below=0cm of top.south] {
                         \adjustbox{
