@@ -22,6 +22,8 @@ You can change the colour scheme, Shadowrun title logo, and/or font setup with c
 
 If no options are specified, the default options are `purple`, `logo-6e`, and `font-6e-freealt`.
 
+`openany` as an option is supported, which allows chapters to open on any page. The default is `openright`, which forces chapters to only open on right pages, as if the file was a book.
+
 ### Commands
 
 The following commands are defined:
@@ -56,7 +58,7 @@ The following environments are defined:
 
 ## Requirements
 
-The sty file requires the following LaTeX packages: adjustbox, anyfontsize, array, atbegshi, background, colortbl, enumitem, etoc, etoolbox, etoolbox, fancyhdr, float, fontspec, geometry, mdframed, multirow, ragged2e, setspace, stfloats, tabularx, tikz, titlesec, titling, transparent, xcolor.
+The sty file requires the following LaTeX packages: adjustbox, anyfontsize, array, background, colortbl, enumitem, etoc, etoolbox, etoolbox, fancyhdr, float, fontspec, geometry, ifthen, mdframed, multirow, ragged2e, setspace, stfloats, tabularx, tikz, titlesec, titling, transparent, xcolor.
 
 All of these packages are available on CTAN and are included in the default Arch Linux TeX live distribution.
 

@@ -1,6 +1,44 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{shadowrun}%[Shadowrun-style two-column book class]
 
+% Declaration of options
+
+\DeclareOption{purple}{\def\themeColour{purple}}
+\DeclareOption{red}{\def\themeColour{red}}
+\DeclareOption{blue}{\def\themeColour{blue}}
+
+\DeclareOption{titlepage-seamless}{\def\titlepageseamless}
+\DeclareOption{titlepage-no-cgl}{\def\titlepagenocgl}
+\DeclareOption{no-images}{
+    \def\noimage
+    \undef{\titlepageseamless}
+    \def\titlepagenocgl
+}
+
+\DeclareOption{no-cgl}{\def\nocgllogo}
+
+\DeclareOption{logo-6e}{\def\titlelogo{logos/Shadowrun 6 Logo.png}}
+\DeclareOption{logo-5e}{\def\titlelogo{logos/Shadowrun 5 Logo.png}}
+\DeclareOption{logo-4e}{\def\titlelogo{logos/Shadowrun 4 Logo.png}}
+\DeclareOption{logo-3e}{\def\titlelogo{logos/Shadowrun 3 Logo.png}}
+\DeclareOption{logo-2e}{\def\titlelogo{logos/Shadowrun 1-2 Logo.png}}
+\DeclareOption{logo-1e}{\def\titlelogo{logos/Shadowrun 1-2 Logo.png}}
+
+\DeclareOption{font-6e-freealt}{\def\fontSet{font-6e-freealt}}
+\DeclareOption{font-6e}{\def\fontSet{font-6e}}
+\DeclareOption{font-5e-freealt}{\def\fontSet{font-5e-freealt}}
+\DeclareOption{font-5e}{\def\fontSet{font-5e}}
+
+\DeclareOption{openany}{
+    \PassOptionsToClass{openany}{book}
+    \def\openingAny
+}
+
+\DeclareOption*{\PackageWarning{shadowrun}{Unknown ‘\CurrentOption’}}
+
+\ExecuteOptions{purple,logo-6e,font-6e-freealt} % set defaults
+
+\ProcessOptions\relax
 \LoadClass[twocolumn]{book}
 
 \RequirePackage{xcolor}
@@ -24,7 +62,6 @@
 \RequirePackage{fancyhdr}
 \RequirePackage{ragged2e}
 \RequirePackage{transparent}
-\RequirePackage{titling}
 \RequirePackage{enumitem}
 \RequirePackage{array}
 \RequirePackage{colortbl}
@@ -33,8 +70,70 @@
 \RequirePackage{tabularx}
 \RequirePackage{setspace}
 \RequirePackage{stfloats}
-\RequirePackage{atbegshi}
 \RequirePackage[export]{adjustbox}
+\RequirePackage{titling}
+\RequirePackage{ifthen}
+
+\definecolor{srpurple}{RGB}{189, 26, 141}
+\definecolor{srred}{RGB}{126, 15, 18}
+\definecolor{srblue}{RGB}{30, 67, 130}
+
+\definecolor{tablebackground}{RGB}{235, 234, 229}
+\definecolor{tablebackground2}{RGB}{224, 224, 217}
+
+\ifthenelse{\equal{\themeColour}{purple}}
+{
+    \colorlet{corecolor}{srpurple}
+    \colorlet{chaptercolor}{white}
+    \colorlet{sectioncolor}{srpurple}
+    \colorlet{subsectioncolor}{black}
+    \def\logo{SR6 logo.png}
+}{}
+\ifthenelse{\equal{\themeColour}{red}}
+{
+    \colorlet{corecolor}{srred}
+    \colorlet{chaptercolor}{white}
+    \colorlet{sectioncolor}{srred}
+    \colorlet{subsectioncolor}{black}
+    \def\logo{SR6 logo-red.png}
+}{}
+\ifthenelse{\equal{\themeColour}{blue}}
+{
+    \colorlet{corecolor}{srblue}
+    \colorlet{chaptercolor}{white}
+    \colorlet{sectioncolor}{srblue}
+    \colorlet{subsectioncolor}{black}
+    \def\logo{SR6 logo-blue.png}
+}{}
+
+\ifdefined\noimage
+    \colorlet{chaptercolor}{black}
+\fi
+
+\ifthenelse{\equal{\fontSet}{font-6e-freealt}}
+{
+    \setfontfamily\titlefont{Mustica Pro Semi-Bold}
+    \setfontfamily\headerfont{Mustica Pro Semi-Bold}
+    \setfontfamily\tablefont{Creato Display}
+}{}
+\ifthenelse{\equal{\fontSet}{font-6e}}
+{
+    \setfontfamily\titlefont{Njord Alternate}
+    \setfontfamily\headerfont{Njord Regular}
+    \setfontfamily\tablefont{Amplitude Medium}
+}{}
+\ifthenelse{\equal{\fontSet}{font-5e-freealt}}
+{
+    \setfontfamily\titlefont{Squares Bold}
+    \setfontfamily\headerfont{Squares Bold}
+    \setfontfamily\tablefont{Univers Condensed Bold}
+}{}
+\ifthenelse{\equal{\fontSet}{font-5e}}
+{
+    \setfontfamily\titlefont{Armadura Solid}
+    \setfontfamily\headerfont{Armadura Solid}
+    \setfontfamily\tablefont{Univers Condensed Bold}
+}{}
 
 \renewcommand{\topfraction}{.85}
 \renewcommand{\bottomfraction}{.7}
@@ -52,88 +151,14 @@
 \usetikzlibrary{calc}
 \usetikzlibrary{math}
 
-\definecolor{srpurple}{RGB}{189, 26, 141}
-\definecolor{srred}{RGB}{126, 15, 18}
-\definecolor{srblue}{RGB}{30, 67, 130}
-
-\definecolor{tablebackground}{RGB}{235, 234, 229}
-\definecolor{tablebackground2}{RGB}{224, 224, 217}
-
-\DeclareOption{purple}
-{
-	%- default purple theme
-	\colorlet{corecolor}{srpurple}
-	\colorlet{chaptercolor}{white}
-	\colorlet{sectioncolor}{srpurple}
-	\colorlet{subsectioncolor}{black}
-	\def\logo{SR6 logo.png}
-}
-\DeclareOption{red}
-{
-    \colorlet{corecolor}{srred}
-    \colorlet{chaptercolor}{white}
-    \colorlet{sectioncolor}{srred}
-    \colorlet{subsectioncolor}{black}
-    \def\logo{SR6 logo-red.png}
-}
-\DeclareOption{blue}
-{
-    \colorlet{corecolor}{srblue}
-    \colorlet{chaptercolor}{white}
-    \colorlet{sectioncolor}{srblue}
-    \colorlet{subsectioncolor}{black}
-    \def\logo{SR6 logo-blue.png}
-}
-
-\DeclareOption{titlepage-seamless}{\def\titlepageseamless}
-\DeclareOption{titlepage-no-cgl}{\def\titlepagenocgl}
-
-\DeclareOption{logo-6e}{\def\titlelogo{logos/Shadowrun 6 Logo.png}} % default logo SR6
-\DeclareOption{logo-5e}{\def\titlelogo{logos/Shadowrun 5 Logo.png}}
-\DeclareOption{logo-4e}{\def\titlelogo{logos/Shadowrun 4 Logo.png}}
-\DeclareOption{logo-3e}{\def\titlelogo{logos/Shadowrun 3 Logo.png}}
-\DeclareOption{logo-2e}{\def\titlelogo{logos/Shadowrun 1-2 Logo.png}}
-\DeclareOption{logo-1e}{\def\titlelogo{logos/Shadowrun 1-2 Logo.png}}
-
 \setmainfont{Shadowrun}
 \setmonofont{Decker}
-\DeclareOption{font-6e-freealt}{ % Mimicking default SR6 fonts
-	\setfontfamily\titlefont{Mustica Pro Semi-Bold}
-	\setfontfamily\headerfont{Mustica Pro Semi-Bold}
-	\setfontfamily\tablefont{Creato Display}
-}
-\DeclareOption{font-6e}{
-	\setfontfamily\titlefont{Njord Alternate}
-	\setfontfamily\headerfont{Njord Regular}
-	\setfontfamily\tablefont{Amplitude Medium}
-}
-\DeclareOption{font-5e-freealt}{
-	\setfontfamily\titlefont{Squares Bold}
-	\setfontfamily\headerfont{Squares Bold}
-	\setfontfamily\tablefont{Univers Condensed Bold}
-}
-\DeclareOption{font-5e}{
-	\setfontfamily\titlefont{Armadura Solid}
-	\setfontfamily\headerfont{Armadura Solid}
-	\setfontfamily\tablefont{Univers Condensed Bold}
-}
-
-\DeclareOption*{\PackageWarning{shadowrun}{Unknown ‘\CurrentOption’}}
 
 \renewcommand\arraystretch{1.2}
 
-\def\titleimage{exampleimage.jpg}
-
-\DeclareOption{no-images}
-{
-    \colorlet{chaptercolor}{black}
-    \def\noimage
-    \undef{\titlepageseamless}
-    \def\titlepagenocgl
-    \undef{\titleimage}
-}
-
-\ExecuteOptions{purple,logo-6e,font-6e-freealt}
+\ifx\noimage\undefined
+    \def\titleimage{exampleimage.jpg}
+\fi
 
 \newcommand{\TitleImage}[1]{\def\titleimage{#1}}
 
@@ -350,7 +375,6 @@
 \titlespacing{\subsection}{0pt}{8pt plus 8pt minus 8pt}{\postheaderlength}
 \titlespacing{\subsubsection}{0pt}{8pt plus 8pt minus 8pt}{\postheaderlength}
 
-\ProcessOptions\relax
 
 \input{environments.tex}
 
@@ -375,8 +399,6 @@
     \pagestyle{plain}
 }
 
-
-
 \renewcommand*{\maketitle}
 {
     \begin{titlepage}
@@ -388,8 +410,6 @@
     	\InsertMark{drawBackground}{1}
     	\InsertMark{drawPageNumber}{1}
     \end{titlepage}
-
-    \AtBeginShipoutNext{\AtBeginShipoutDiscard}
 }
 
 \pretocmd{\tableofcontents}
@@ -399,7 +419,11 @@
 
 \apptocmd{\tableofcontents}
 {
-    \cleardoublepage
+    \ifx\openingAny\undefined
+        \cleardoublepage
+    \else
+        \clearpage
+    \fi
     \beginnumbering
 }{}{}
 
