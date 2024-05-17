@@ -17,12 +17,12 @@
 
 \DeclareOption{no-cgl}{\def\nocgllogo}
 
-\DeclareOption{logo-6e}{\def\titlelogo{logos/Shadowrun 6 Logo.png}}
-\DeclareOption{logo-5e}{\def\titlelogo{logos/Shadowrun 5 Logo.png}}
-\DeclareOption{logo-4e}{\def\titlelogo{logos/Shadowrun 4 Logo.png}}
-\DeclareOption{logo-3e}{\def\titlelogo{logos/Shadowrun 3 Logo.png}}
-\DeclareOption{logo-2e}{\def\titlelogo{logos/Shadowrun 1-2 Logo.png}}
-\DeclareOption{logo-1e}{\def\titlelogo{logos/Shadowrun 1-2 Logo.png}}
+\DeclareOption{logo-6e}{\def\titlelogo{images/logos/Shadowrun 6 Logo.png}}
+\DeclareOption{logo-5e}{\def\titlelogo{images/logos/Shadowrun 5 Logo.png}}
+\DeclareOption{logo-4e}{\def\titlelogo{images/logos/Shadowrun 4 Logo.png}}
+\DeclareOption{logo-3e}{\def\titlelogo{images/logos/Shadowrun 3 Logo.png}}
+\DeclareOption{logo-2e}{\def\titlelogo{images/logos/Shadowrun 1-2 Logo.png}}
+\DeclareOption{logo-1e}{\def\titlelogo{images/logos/Shadowrun 1-2 Logo.png}}
 
 \DeclareOption{font-6e-freealt}{\def\fontSet{font-6e-freealt}}
 \DeclareOption{font-6e}{\def\fontSet{font-6e}}
@@ -91,7 +91,7 @@
     \colorlet{chaptercolor}{white}
     \colorlet{sectioncolor}{srpurple}
     \colorlet{subsectioncolor}{black}
-    \def\logo{SR6 logo.png}
+    \def\logo{images/SR6 logo.png}
 }{}
 \ifthenelse{\equal{\themeColour}{red}}
 {
@@ -99,7 +99,7 @@
     \colorlet{chaptercolor}{white}
     \colorlet{sectioncolor}{srred}
     \colorlet{subsectioncolor}{black}
-    \def\logo{SR6 logo-red.png}
+    \def\logo{images/SR6 logo-red.png}
 }{}
 \ifthenelse{\equal{\themeColour}{blue}}
 {
@@ -107,7 +107,7 @@
     \colorlet{chaptercolor}{white}
     \colorlet{sectioncolor}{srblue}
     \colorlet{subsectioncolor}{black}
-    \def\logo{SR6 logo-blue.png}
+    \def\logo{images/SR6 logo-blue.png}
 }{}
 
 \ifdefined\noimage
@@ -181,9 +181,9 @@
         \node (background) at (0, 0) {%
         \ifx\noimage\undefined
             \ifodd\value{page}
-            \includegraphics[width=\paperwidth,height=\paperheight]{background-left.png}
+            \includegraphics[width=\paperwidth,height=\paperheight]{images/background-left.png}
             \else
-            \includegraphics[width=\paperwidth,height=\paperheight]{background-right.png}
+            \includegraphics[width=\paperwidth,height=\paperheight]{images/background-right.png}
             \fi
         \fi
         };
@@ -192,7 +192,7 @@
                 \node (chapter) [below=0cm of background.north]
                 {
                     \ifx\noimage\undefined
-                        \includegraphics[width=\paperwidth]{chapter-intro.png}
+                        \includegraphics[width=\paperwidth]{images/chapter-intro.png}
                     \fi
                 };
                 \ifx\noimage\undefined
@@ -211,7 +211,7 @@
                 \node (chapter) [below=-12.5cm of background.north]
                 {
                     \ifx\noimage\undefined
-                        \includegraphics[width=\paperwidth]{chapter-intro.png}
+                        \includegraphics[width=\paperwidth]{images/chapter-intro.png}
                     \fi
                 };
                 \node (logo) [above right=-0.8cm and 1cm of chapter.south west]
@@ -244,12 +244,12 @@
                         \node[rectangle,fill=black,draw,minimum width=\paperwidth,minimum height=\paperheight] (background) at (0, 0) {};% Use regular background if we are using seamless title page with a title image, since it won't be visible and is much smaller.
                     \else
                         \node (background) at (0, 0) {
-                            \includegraphics[width=\paperwidth, height=\paperheight]{frontpage.png}
+                            \includegraphics[width=\paperwidth, height=\paperheight]{images/frontpage.png}
                         };
                     \fi
                 \else
                     \node (background) at (0, 0) {
-                        \includegraphics[width=\paperwidth, height=\paperheight]{frontpage.png}
+                        \includegraphics[width=\paperwidth, height=\paperheight]{images/frontpage.png}
                     };
                 \fi
             \fi
@@ -272,7 +272,7 @@
                 \end{pgfonlayer}
                 \begin{pgfonlayer}{logos}
     		        \node (catalystlogo) [above right=0.7675cm and 2.2cm of background.south west] {
-    		        	\includegraphics[width=2.2cm]{Catalyst Logo Revised July 2009.png}
+    		        	\includegraphics[width=2.2cm]{images/Catalyst Logo Revised July 2009.png}
     		        };
                 \end{pgfonlayer}
 		    \else
@@ -310,10 +310,10 @@
         \end{pgfonlayer}
         \ifdefined\titlepageseamless
             \node (titlebackground-top) [above=-1.375cm of titletext.south] {
-                \includegraphics[width=\paperwidth]{chapter-intro.png}
+                \includegraphics[width=\paperwidth]{images/chapter-intro.png}
             };
             \node (titlebackground-bottom) [below=-4.5cm of background.south] {
-                \includegraphics[width=\paperwidth,angle=180,origin=c]{chapter-intro.png}
+                \includegraphics[width=\paperwidth,angle=180,origin=c]{images/chapter-intro.png}
             };
         \fi
         \begin{pgfonlayer}{titleimage}
