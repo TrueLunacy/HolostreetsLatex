@@ -33,10 +33,14 @@
     \PassOptionsToClass{openany}{book}
     \def\openingAny
 }
+\DeclareOption{openright}{
+    \PassOptionsToClass{openright}{book}
+    \def\openingRight
+}
 
 \DeclareOption*{\PackageWarning{shadowrun}{Unknown ‘\CurrentOption’}}
 
-\ExecuteOptions{purple,logo-6e,font-6e-freealt} % set defaults
+\ExecuteOptions{purple,logo-6e,font-6e-freealt,openright} % set defaults
 
 \ProcessOptions\relax
 \LoadClass[twocolumn]{book}
@@ -234,19 +238,21 @@
         \pgfdeclarelayer{text}
         \pgfsetlayers{background,titleimage,main,logos,text}
         \begin{pgfonlayer}{background}
-            \node (background) at (0, 0) {%
-                \ifx\noimage\undefined
-                    \ifdefined\titlepageseamless
-                        \ifdefined\titleimage
-                            \includegraphics[width=\paperwidth, height=\paperheight]{background-left.png} % Use regular background if we are using seamless title page with a title image, since it won't be visible and is much smaller.
-                        \else
-                            \includegraphics[width=\paperwidth, height=\paperheight]{frontpage.png}
-                        \fi
+            \ifx\noimage\undefined
+                \ifdefined\titlepageseamless
+                    \ifdefined\titleimage
+                        \node[rectangle,fill=black,draw,minimum width=\paperwidth,minimum height=\paperheight] (background) at (0, 0) {};% Use regular background if we are using seamless title page with a title image, since it won't be visible and is much smaller.
                     \else
-                        \includegraphics[width=\paperwidth, height=\paperheight]{frontpage.png}
+                        \node (background) at (0, 0) {
+                            \includegraphics[width=\paperwidth, height=\paperheight]{frontpage.png}
+                        };
                     \fi
+                \else
+                    \node (background) at (0, 0) {
+                        \includegraphics[width=\paperwidth, height=\paperheight]{frontpage.png}
+                    };
                 \fi
-            };
+            \fi
         \end{pgfonlayer}
         \useasboundingbox (background.south east) rectangle (background.north west);
         \ifx\noimage\undefined
@@ -410,6 +416,7 @@
 \renewcommand*{\maketitle}
 {
     \begin{titlepage}
+        \pagenumbering{Alph}
     	\thispagestyle{titlepage}
     	\InsertMark{drawPageNumber}{0}
     	\InsertMark{drawBackground}{0}
@@ -417,6 +424,7 @@
     	\clearpage
     	\InsertMark{drawBackground}{1}
     	\InsertMark{drawPageNumber}{1}
+        \pagenumbering{arabic}
     \end{titlepage}
 }
 
@@ -427,10 +435,10 @@
 
 \apptocmd{\tableofcontents}
 {
-    \ifx\openingAny\undefined
-        \cleardoublepage
-    \else
+    \ifdefined\openingAny
         \clearpage
+    \else
+        \cleardoublepage
     \fi
     \beginnumbering
 }{}{}
