@@ -1,0 +1,175 @@
+\backgroundsetup{
+    scale=1,
+    opacity=1,
+    angle=0,
+    color=black,
+    contents={%
+    \ifodd\LastMark{drawBackground}
+    \begin{tikzpicture}
+        \node (background) at (0, 0) {%
+        \ifx\@noimage\undefined
+            \ifodd\value{page}
+            \includegraphics[width=\paperwidth,height=\paperheight]{images/background-left.png}
+            \else
+            \includegraphics[width=\paperwidth,height=\paperheight]{images/background-right.png}
+            \fi
+        \fi
+        };
+        \begin{pgfinterruptboundingbox}
+            \ifodd\FirstMark{isChapter}
+                \node (chapter) [below=0cm of background.north]
+                {
+                    \ifx\@noimage\undefined
+                        \includegraphics[width=\paperwidth]{images/chapter-intro.png}
+                    \fi
+                };
+                \ifx\@noimage\undefined
+                    \node (logo) [below=2.5cm of chapter.north]{{\includegraphics[height=10.5cm]{\@logo}}};
+                \else
+                    \node (logo) at (0, 0) {};
+                \fi
+                \node (chaptertext) [align=center, above=-0.1cm of logo.south, text width=13cm] {\color{chaptercolor}\fontsize{60pt}{70pt}\headerfont\MakeUppercase{\FirstMark{chapter}}};
+                \node (bottom_left) [shape=coordinate, below left=0.5cm+3pt and 0cm of chaptertext.south west] {};
+                \node (bottom_right) [shape=coordinate, below right=0.5cm and 0cm of chaptertext.south east] {};
+                \node (top_left) [shape=coordinate, above left=0.5cm+3pt and 0cm of chaptertext.north west] {};
+                \node (top_right) [shape=coordinate, above right=0.5cm and 0cm of chaptertext.north east] {};
+                \fill [pattern color=corecolor, pattern=north east lines] (bottom_left) rectangle (bottom_right);
+                \fill [pattern color=corecolor, pattern=north east lines] (top_left) rectangle(top_right);
+            \else
+                \node (chapter) [below=-12.5cm of background.north]
+                {
+                    \ifx\@noimage\undefined
+                        \includegraphics[width=\paperwidth]{images/chapter-intro.png}
+                    \fi
+                };
+                \node (logo) [above right=-0.8cm and 1cm of chapter.south west]
+                {
+                    \ifx\@noimage\undefined
+                        \includegraphics[width=4cm]{\@logo}
+                    \fi
+                };
+                \ifodd\LastMark{drawPageNumber}
+                    \node (pageanchor) [shape=coordinate, above left=2.3cm and 2.5cm of chapter.south east]{};
+                    \draw [color=corecolor, line width=1pt] (pageanchor) -- ++(0, -1.12) -- ++(-2.04,0) -- ++(0, 1.52) -- ++(1.66, 0) -- (pageanchor);
+                    \node (pagetext) [below left=-0.2cm and 0.95cm of pageanchor] {\color{white}\tt\small PAGE};
+                    \node (pageline) [below right=0.1cm and 0cm of pagetext.south west] {\color{white}\tt\tiny////////////////////};
+                    \node (pagenum) [below=0.1cm of pageline] {\color{white}\tt\huge\thepage};
+                \fi
+            \fi
+        \end{pgfinterruptboundingbox}
+    \end{tikzpicture}
+    \else
+    \begin{tikzpicture}
+        \pgfdeclarelayer{background}
+        \pgfdeclarelayer{titleimage}
+        \pgfdeclarelayer{logos}
+        \pgfdeclarelayer{text}
+        \pgfsetlayers{background,titleimage,main,logos,text}
+        \begin{pgfonlayer}{background}
+            \ifx\@noimage\undefined
+                \ifdefined\@titlepageseamless
+                    \ifdefined\titleimage
+                        \node[rectangle,fill=black,draw,minimum width=\paperwidth,minimum height=\paperheight] (background) at (0, 0) {};% Use regular background if we are using seamless title page with a title image, since it won't be visible and is much smaller.
+                    \else
+                        \node (background) at (0, 0) {
+                            \includegraphics[width=\paperwidth, height=\paperheight]{images/frontpage.png}
+                        };
+                    \fi
+                \else
+                    \node (background) at (0, 0) {
+                        \includegraphics[width=\paperwidth, height=\paperheight]{images/frontpage.png}
+                    };
+                \fi
+            \fi
+        \end{pgfonlayer}
+        \useasboundingbox (background.south east) rectangle (background.north west);
+        \ifx\@noimage\undefined
+            \begin{pgfonlayer}{logos}
+                \node (title) [below=0.5cm of background.north] {
+                    \includegraphics[width=\paperwidth]{\@titlelogo}
+                };
+                \node (holostreets) [above=1.475cm of background.south] {
+                    \includegraphics[width=12cm]{holostreets.png}
+                };
+            \end{pgfonlayer}
+            \ifx\@nocgllogo\undefined
+                \begin{pgfonlayer}{text}
+                    \node (legaltext) [above right=0.7925cm and -5cm of background.south] {
+                        \parbox{13.5cm}{\footnotesize\color{gray}\shadowrunlegaltext}
+                    };
+                \end{pgfonlayer}
+                \begin{pgfonlayer}{logos}
+                    \node (catalystlogo) [above right=0.7675cm and 2.2cm of background.south west] {
+                        \includegraphics[width=2.2cm]{images/Catalyst Logo Revised July 2009.png}
+                    };
+                \end{pgfonlayer}
+            \else
+                \begin{pgfonlayer}{text}
+                    \node (legaltext) [above=0.7925 of background.south] {
+                        \parbox{16cm}{\centering \footnotesize\color{gray}\shadowrunlegaltext}
+                    };
+                \end{pgfonlayer}
+            \fi
+        \else
+            \begin{pgfonlayer}{logos}
+                \node (title) [below=1cm of background.north] {
+                    \fontsize{80pt}{100pt}\titlefont\color{black}SHADOWRUN\vspace{40pt}
+                };
+                \node (holostreets) [above=1.475cm of background.south]{};
+            \end{pgfonlayer}
+            \begin{pgfonlayer}{text}
+                \node (legaltext) [above=2cm of background.south] {
+                    \parbox{16cm}{\centering This document is in NO IMAGES MODE. You probably shouldn't publish it as-is.}
+                };
+            \end{pgfonlayer}
+        \fi
+        \begin{pgfonlayer}{text}
+            \node (titletext) [below=-0.75cm of title.south] {
+                \parbox{20cm}{
+                    \centering\fontsize{40pt}{60pt}\titlefont
+                    \ifx\@noimage\undefined
+                        \color{white}
+                    \else
+                        \color{black}
+                    \fi
+                    \MakeUppercase{\thetitle}
+                }
+            };
+        \end{pgfonlayer}
+        \ifdefined\@titlepageseamless
+            \node (titlebackground-top) [above=-1.375cm of titletext.south] {
+                \includegraphics[width=\paperwidth]{images/chapter-intro.png}
+            };
+            \node (titlebackground-bottom) [below=-4.5cm of background.south] {
+                \includegraphics[width=\paperwidth,angle=180,origin=c]{images/chapter-intro.png}
+            };
+        \fi
+        \begin{pgfonlayer}{titleimage}
+            \ifdefined\titleimage
+                \ifdefined\@titlepageseamless
+                    \node (bottom) [shape=coordinate, below=2.5cm of holostreets.north] {};
+                    \node (top) [shape=coordinate, below=1cm of titletext.north] {};
+                    \pgfextracty{\titleimageheight}{\pgfpointdiff{\pgfpointanchor{bottom}{center}}{\pgfpointanchor{top}{center}}}
+                    \node (@titlelogo) [below=0cm of top.south] {
+                        \adjustbox{
+                            min size={\paperwidth}{\titleimageheight},
+                            Clip*={0.5\width - 0.5\paperwidth} {0.5\totalheight - 0.5\titleimageheight}
+                            {0.5\width + 0.5\paperwidth} {0.5\totalheight + 0.5\titleimageheight}
+                        }{
+                            \includegraphics[max size={\paperwidth}{\titleimageheight}]{\titleimage}
+                        }
+                    };
+                \else
+                    \node (bottom) [shape=coordinate, below=0.5cm of holostreets.north] {};
+                    \node (top) [shape=coordinate, below=0.2cm of titletext.south] {};
+                    \pgfextracty{\titleimageheight}{\pgfpointdiff{\pgfpointanchor{bottom}{center}}{\pgfpointanchor{top}{center}}}
+                    \node (@titlelogo) [below=0.2cm of top] {
+                        \includegraphics[height=\titleimageheight]{\titleimage}
+                    };
+                \fi
+            \fi
+        \end{pgfonlayer}
+    \end{tikzpicture}
+    \fi
+    }
+}

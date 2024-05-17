@@ -1,0 +1,35 @@
+\definecolor{srpurple}{RGB}{189, 26, 141}
+\definecolor{srred}{RGB}{126, 15, 18}
+\definecolor{srblue}{RGB}{30, 67, 130}
+
+\definecolor{tablebackground}{RGB}{235, 234, 229}
+\definecolor{tablebackground2}{RGB}{224, 224, 217}
+
+\ifthenelse{\equal{\@themeColour}{purple}}
+{
+    \colorlet{corecolor}{srpurple}
+    \colorlet{chaptercolor}{white}
+    \colorlet{sectioncolor}{srpurple}
+    \colorlet{subsectioncolor}{black}
+    \def\@logo{images/SR6 logo.png}
+}{}
+\ifthenelse{\equal{\@themeColour}{red}}
+{
+    \colorlet{corecolor}{srred}
+    \colorlet{chaptercolor}{white}
+    \colorlet{sectioncolor}{srred}
+    \colorlet{subsectioncolor}{black}
+    \def\@logo{images/SR6 logo-red.png}
+}{}
+\ifthenelse{\equal{\@themeColour}{blue}}
+{
+    \colorlet{corecolor}{srblue}
+    \colorlet{chaptercolor}{white}
+    \colorlet{sectioncolor}{srblue}
+    \colorlet{subsectioncolor}{black}
+    \def\@logo{images/SR6 logo-blue.png}
+}{}
+
+\ifdefined\@noimage
+    \colorlet{chaptercolor}{black}
+\fi

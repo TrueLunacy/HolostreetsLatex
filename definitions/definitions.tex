@@ -1,0 +1,20 @@
+
+\setcounter{topnumber}{9}
+\setcounter{bottomnumber}{9}
+\setcounter{totalnumber}{20}
+\setcounter{dbltopnumber}{9}
+
+\newdimen\titleimageheight
+
+\def\@headerrule{}
+\newlength{\postheaderlength}
+
+\NewMarkClass{chapter}
+\NewMarkClass{section}
+\NewMarkClass{isChapter}
+\NewMarkClass{drawBackground}
+\NewMarkClass{drawPageNumber}
+
+\ifx\@noimage\undefined
+    \def\titleimage{exampleimage.jpg}
+\fi

@@ -1,3 +1,16 @@
+% commands.tex - for commands we expect the user to use
+% executed after definitions but before configuration
+
+\newcommand{\TitleImage}[1]{\def\titleimage{#1}}
+
+\newcommand{\shadowrunlegaltext}{Shadowrun, Sixth World, and Matrix, and associated graphics and logos are registered trademarks and/or trademarks of The Topps Company, Inc., in the United States and/or other countries. Catalyst Game Labs and the Catalyst Game Labs logo are trademarks of InMediaRes Productions, LLC.}
+
+\newcommand{\beginnumbering}
+{
+    \InsertMark{drawPageNumber}{1}
+    \setcounter{page}{1}
+}
+
 \newenvironment{chatter}
 {
     \tt

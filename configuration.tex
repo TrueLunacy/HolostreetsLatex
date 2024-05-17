@@ -1,0 +1,85 @@
+% configuration.tex is catch-all 'doing things'
+% it's executed second last, before the background
+
+\etocsettocstyle
+{
+}
+{
+}
+
+\patchcmd{\chapter}{\thispagestyle{plain}}{\thispagestyle{fancy}}{}{}
+
+\renewcommand{\chaptermark}[1]{\InsertMark{chapter}{#1}\InsertMark{section}{}\InsertMark{isChapter}{1}\InsertMark{isChapter}{0}}
+\renewcommand{\sectionmark}[1]{\InsertMark{section}{#1}}
+
+\renewenvironment{FlushLeft}{%
+   \topsep=0pt
+   \partopsep=0pt
+   \trivlist%
+   \RaggedRight\item\relax
+   }{%
+   \endtrivlist%
+}
+
+\newcommand{\@nullify}[1]{}
+
+\titleformat{\chapter}[display]{\centering\color{chaptercolor}\fontsize{60pt}{70pt}\headerfont}{}{0pt}{\@nullify}
+\titlespacing{\chapter}{0pt}{130pt}{90pt}
+\titleformat{\section}[hang]{\color{sectioncolor}\headerfont\huge\RaggedRight}{}{0pt}{\MakeUppercase}[\ifdefined\@headerrule\hrule\fi]
+\titleformat{\subsection}[hang]{\color{subsectioncolor}\headerfont\Large\RaggedRight}{}{0pt}{\MakeUppercase}[\ifdefined\@headerrule\hrule\fi]
+\titleformat{\subsubsection}[hang]{\color{subsectioncolor}\headerfont\normalsize\RaggedRight}{}{0pt}{\MakeUppercase}[\ifdefined\@headerrule\hrule\fi]
+\titlespacing{\section}{0pt}{8pt plus 8pt minus 8pt}{\postheaderlength}
+\titlespacing{\subsection}{0pt}{8pt plus 8pt minus 8pt}{\postheaderlength}
+\titlespacing{\subsubsection}{0pt}{8pt plus 8pt minus 8pt}{\postheaderlength}
+
+
+\AtBeginDocument{
+    \pagenumbering{arabic}
+    \InsertMark{isChapter}{0}
+    \InsertMark{drawBackground}{1}
+    \InsertMark{drawPageNumber}{0}
+
+	\fancypagestyle{plain}
+	{
+    	\fancyhf{}
+    	\fancyfoot[LO]{\headerfont\color{corecolor}\MakeUppercase{\FirstMark{chapter}\space//\space\large\LastMark{section}}}
+    	\fancyfoot[RE]{\headerfont\color{corecolor}\MakeUppercase{\large\LastMark{section}\space//\space\normalsize\FirstMark{chapter}}}
+	}
+
+	\fancypagestyle{titlepage}[plain]
+	{
+		\fancyhf{}
+	}
+
+    \pagestyle{plain}
+}
+
+\renewcommand*{\maketitle}
+{
+    \begin{titlepage}
+        \pagenumbering{Alph}
+    	\thispagestyle{titlepage}
+    	\InsertMark{drawPageNumber}{0}
+    	\InsertMark{drawBackground}{0}
+    	\null
+    	\clearpage
+    	\InsertMark{drawBackground}{1}
+    	\InsertMark{drawPageNumber}{1}
+        \pagenumbering{arabic}
+    \end{titlepage}
+}
+
+\pretocmd{\tableofcontents}
+{
+    \InsertMark{drawPageNumber}{0}
+}{}{}
+
+\apptocmd{\tableofcontents}
+{
+    \ifdefined\@openingAny
+        \clearpage
+    \else
+        \cleardoublepage
+    \fi
+    \beginnumbering
+}{}{}

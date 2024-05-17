@@ -1,0 +1,42 @@
+% Options.tex is executed before options are executed (duh) and before any packages are imported
+% Use it for setting config options, but if you need to set more complex things post-packages, do it
+% in definitions.tex
+%
+% Default options are set in shadowrun.cls
+
+\DeclareOption{purple}{\def\@themeColour{purple}}
+\DeclareOption{red}{\def\@themeColour{red}}
+\DeclareOption{blue}{\def\@themeColour{blue}}
+
+\DeclareOption{titlepage-seamless}{\def\@titlepageseamless}
+\DeclareOption{titlepage-no-cgl}{\def\@titlepagenocgl}
+\DeclareOption{no-images}{
+    \def\@noimage
+    \undef{\@titlepageseamless}
+    \def\@titlepagenocgl
+}
+
+\DeclareOption{no-cgl}{\def\@nocgllogo}
+
+\DeclareOption{logo-6e}{\def\@titlelogo{images/logos/Shadowrun 6 Logo.png}}
+\DeclareOption{logo-5e}{\def\@titlelogo{images/logos/Shadowrun 5 Logo.png}}
+\DeclareOption{logo-4e}{\def\@titlelogo{images/logos/Shadowrun 4 Logo.png}}
+\DeclareOption{logo-3e}{\def\@titlelogo{images/logos/Shadowrun 3 Logo.png}}
+\DeclareOption{logo-2e}{\def\@titlelogo{images/logos/Shadowrun 1-2 Logo.png}}
+\DeclareOption{logo-1e}{\def\@titlelogo{images/logos/Shadowrun 1-2 Logo.png}}
+
+\DeclareOption{font-6e-freealt}{\def\@fontSet{font-6e-freealt}}
+\DeclareOption{font-6e}{\def\@fontSet{font-6e}}
+\DeclareOption{font-5e-freealt}{\def\@fontSet{font-5e-freealt}}
+\DeclareOption{font-5e}{\def\@fontSet{font-5e}}
+
+\DeclareOption{openany}{
+    \PassOptionsToClass{openany}{book}
+    \def\@openingAny
+}
+\DeclareOption{openright}{
+    \PassOptionsToClass{openright}{book}
+    \def\@openingRight
+}
+
+\DeclareOption*{\PackageWarning{shadowrun}{Unknown ‘\CurrentOption’}}
