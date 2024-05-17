@@ -1,6 +1,48 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{shadowrun}%[Shadowrun-style two-column book class]
 
+% Declaration of options
+
+\DeclareOption{purple}{\def\themeColour{purple}}
+\DeclareOption{red}{\def\themeColour{red}}
+\DeclareOption{blue}{\def\themeColour{blue}}
+
+\DeclareOption{titlepage-seamless}{\def\titlepageseamless}
+\DeclareOption{titlepage-no-cgl}{\def\titlepagenocgl}
+\DeclareOption{no-images}{
+    \def\noimage
+    \undef{\titlepageseamless}
+    \def\titlepagenocgl
+}
+
+\DeclareOption{no-cgl}{\def\nocgllogo}
+
+\DeclareOption{logo-6e}{\def\titlelogo{logos/Shadowrun 6 Logo.png}}
+\DeclareOption{logo-5e}{\def\titlelogo{logos/Shadowrun 5 Logo.png}}
+\DeclareOption{logo-4e}{\def\titlelogo{logos/Shadowrun 4 Logo.png}}
+\DeclareOption{logo-3e}{\def\titlelogo{logos/Shadowrun 3 Logo.png}}
+\DeclareOption{logo-2e}{\def\titlelogo{logos/Shadowrun 1-2 Logo.png}}
+\DeclareOption{logo-1e}{\def\titlelogo{logos/Shadowrun 1-2 Logo.png}}
+
+\DeclareOption{font-6e-freealt}{\def\fontSet{font-6e-freealt}}
+\DeclareOption{font-6e}{\def\fontSet{font-6e}}
+\DeclareOption{font-5e-freealt}{\def\fontSet{font-5e-freealt}}
+\DeclareOption{font-5e}{\def\fontSet{font-5e}}
+
+\DeclareOption{openany}{
+    \PassOptionsToClass{openany}{book}
+    \def\openingAny
+}
+\DeclareOption{openright}{
+    \PassOptionsToClass{openright}{book}
+    \def\openingRight
+}
+
+\DeclareOption*{\PackageWarning{shadowrun}{Unknown ‘\CurrentOption’}}
+
+\ExecuteOptions{purple,logo-6e,font-6e-freealt,openright} % set defaults
+
+\ProcessOptions\relax
 \LoadClass[twocolumn]{book}
 
 \RequirePackage{xcolor}
@@ -14,7 +56,7 @@
     top=32.5mm,
     bottom=20mm
 ]{geometry}
-\RequirePackage{fontspec}
+\RequirePackage[no-math]{fontspec}
 \RequirePackage{background}
 \RequirePackage{etoc}
 \RequirePackage{tikz}
@@ -24,7 +66,6 @@
 \RequirePackage{fancyhdr}
 \RequirePackage{ragged2e}
 \RequirePackage{transparent}
-\RequirePackage{titling}
 \RequirePackage{enumitem}
 \RequirePackage{array}
 \RequirePackage{colortbl}
@@ -33,6 +74,70 @@
 \RequirePackage{tabularx}
 \RequirePackage{setspace}
 \RequirePackage{stfloats}
+\RequirePackage[export]{adjustbox}
+\RequirePackage{titling}
+\RequirePackage{ifthen}
+
+\definecolor{srpurple}{RGB}{189, 26, 141}
+\definecolor{srred}{RGB}{126, 15, 18}
+\definecolor{srblue}{RGB}{30, 67, 130}
+
+\definecolor{tablebackground}{RGB}{235, 234, 229}
+\definecolor{tablebackground2}{RGB}{224, 224, 217}
+
+\ifthenelse{\equal{\themeColour}{purple}}
+{
+    \colorlet{corecolor}{srpurple}
+    \colorlet{chaptercolor}{white}
+    \colorlet{sectioncolor}{srpurple}
+    \colorlet{subsectioncolor}{black}
+    \def\logo{SR6 logo.png}
+}{}
+\ifthenelse{\equal{\themeColour}{red}}
+{
+    \colorlet{corecolor}{srred}
+    \colorlet{chaptercolor}{white}
+    \colorlet{sectioncolor}{srred}
+    \colorlet{subsectioncolor}{black}
+    \def\logo{SR6 logo-red.png}
+}{}
+\ifthenelse{\equal{\themeColour}{blue}}
+{
+    \colorlet{corecolor}{srblue}
+    \colorlet{chaptercolor}{white}
+    \colorlet{sectioncolor}{srblue}
+    \colorlet{subsectioncolor}{black}
+    \def\logo{SR6 logo-blue.png}
+}{}
+
+\ifdefined\noimage
+    \colorlet{chaptercolor}{black}
+\fi
+
+\ifthenelse{\equal{\fontSet}{font-6e-freealt}}
+{
+    \setfontfamily\titlefont{Mustica Pro Semi-Bold}
+    \setfontfamily\headerfont{Mustica Pro Semi-Bold}
+    \setfontfamily\tablefont{Creato Display}
+}{}
+\ifthenelse{\equal{\fontSet}{font-6e}}
+{
+    \setfontfamily\titlefont{Njord Alternate}
+    \setfontfamily\headerfont{Njord Regular}
+    \setfontfamily\tablefont{Amplitude Medium}
+}{}
+\ifthenelse{\equal{\fontSet}{font-5e-freealt}}
+{
+    \setfontfamily\titlefont{Squares Bold}
+    \setfontfamily\headerfont{Squares Bold}
+    \setfontfamily\tablefont{Univers Condensed Bold}
+}{}
+\ifthenelse{\equal{\fontSet}{font-5e}}
+{
+    \setfontfamily\titlefont{Armadura Solid}
+    \setfontfamily\headerfont{Armadura Solid}
+    \setfontfamily\tablefont{Univers Condensed Bold}
+}{}
 
 \renewcommand{\topfraction}{.85}
 \renewcommand{\bottomfraction}{.7}
@@ -50,64 +155,23 @@
 \usetikzlibrary{calc}
 \usetikzlibrary{math}
 
-\definecolor{srpurple}{RGB}{189, 26, 141}
-\definecolor{srred}{RGB}{126, 15, 18}
-\definecolor{srblue}{RGB}{30, 67, 130}
-
-\definecolor{tablebackground}{RGB}{235, 234, 229}
-\definecolor{tablebackground2}{RGB}{224, 224, 217}
-
-%- default purple theme
-\colorlet{corecolor}{srpurple}
-\colorlet{chaptercolor}{white}
-\colorlet{sectioncolor}{srpurple}
-\colorlet{subsectioncolor}{black}
-\def\logo{SR6 logo.png}
-
-\DeclareOption{red}
-{
-    \colorlet{corecolor}{srred}
-    \colorlet{chaptercolor}{white}
-    \colorlet{sectioncolor}{srred}
-    \colorlet{subsectioncolor}{black}
-    \def\logo{SR6 logo-red.png}
-}
-\DeclareOption{blue}
-{
-    \colorlet{corecolor}{srblue}
-    \colorlet{chaptercolor}{white}
-    \colorlet{sectioncolor}{srblue}
-    \colorlet{subsectioncolor}{black}
-    \def\logo{SR6 logo-blue.png}
-}
-
-\DeclareOption{no-images}
-{
-    \colorlet{chaptercolor}{black}
-    \def\noimage
-}
-
-% default logo SR6
-\def\titlelogo{logos/Shadowrun 6 Logo.png}
-
-\DeclareOption{logo-5e}{\def\titlelogo{logos/Shadowrun 5 Logo.png}}
-\DeclareOption{logo-4e}{\def\titlelogo{logos/Shadowrun 4 Logo.png}}
-\DeclareOption{logo-3e}{\def\titlelogo{logos/Shadowrun 3 Logo.png}}
-\DeclareOption{logo-2e}{\def\titlelogo{logos/Shadowrun 1-2 Logo.png}}
-\DeclareOption{logo-1e}{\def\titlelogo{logos/Shadowrun 1-2 Logo.png}}
-
-\DeclareOption*{\PackageWarning{shadowrun}{Unknown ‘\CurrentOption’}}
+\setmainfont{Shadowrun}
+\setmonofont{Decker}
 
 \renewcommand\arraystretch{1.2}
 
-\def\titleimage{exampleimage.jpg}
+\ifx\noimage\undefined
+    \def\titleimage{exampleimage.jpg}
+\fi
 
 \newcommand{\TitleImage}[1]{\def\titleimage{#1}}
 
 \newdimen\titleimageheight
 
+\newcommand{\shadowrunlegaltext}{Shadowrun, Sixth World, and Matrix, and associated graphics and logos are registered trademarks and/or trademarks of The Topps Company, Inc., in the United States and/or other countries. Catalyst Game Labs and the Catalyst Game Labs logo are trademarks of InMediaRes Productions, LLC.}
+
 \backgroundsetup{
-    scale=1, 
+    scale=1,
     opacity=1,
     angle=0,
     color=black,
@@ -125,26 +189,26 @@
         };
         \begin{pgfinterruptboundingbox}
             \ifodd\FirstMark{isChapter}
-                \node (chapter) [below=0cm of background.north] 
+                \node (chapter) [below=0cm of background.north]
                 {
                     \ifx\noimage\undefined
                         \includegraphics[width=\paperwidth]{chapter-intro.png}
                     \fi
                 };
                 \ifx\noimage\undefined
-                    \node (logo) [above right=1.8cm and (1in + \hoffset + \oddsidemargin + 0.5\textwidth)-6cm of chapter.south west]{{\transparent{0.4}\includegraphics[width=12cm]{\logo}}};
+                    \node (logo) [below=2.5cm of chapter.north]{{\includegraphics[height=10.5cm]{\logo}}};
                 \else
-                    \node (logo) at (0, 0) {};                
+                    \node (logo) at (0, 0) {};
                 \fi
-                \node (chaptertext) [align=center, above=1.5cm+20pt of logo.south] {\color{chaptercolor}\fontsize{60pt}{70pt}\headerfont\MakeUppercase{\FirstMark{chapter}}};
-                \node (bottom_left) [shape=coordinate, below left=0.3cm+4pt and 2cm of chaptertext.south west] {};
-                \node (bottom_right) [shape=coordinate, below right=0.3cm and 2cm of chaptertext.south east] {};
-                \node (top_left) [shape=coordinate, above left=0.3cm+4pt and 2cm of chaptertext.north west] {};
-                \node (top_right) [shape=coordinate, above right=0.3cm and 2cm of chaptertext.north east] {};
-                \fill [pattern color=corecolor, pattern=crosshatch] (bottom_left) rectangle (bottom_right);
-                \fill [pattern color=corecolor, pattern=crosshatch] (top_left) rectangle(top_right);
+                \node (chaptertext) [align=center, above=-0.1cm of logo.south, text width=13cm] {\color{chaptercolor}\fontsize{60pt}{70pt}\headerfont\MakeUppercase{\FirstMark{chapter}}};
+                \node (bottom_left) [shape=coordinate, below left=0.5cm+3pt and 0cm of chaptertext.south west] {};
+                \node (bottom_right) [shape=coordinate, below right=0.5cm and 0cm of chaptertext.south east] {};
+                \node (top_left) [shape=coordinate, above left=0.5cm+3pt and 0cm of chaptertext.north west] {};
+                \node (top_right) [shape=coordinate, above right=0.5cm and 0cm of chaptertext.north east] {};
+                \fill [pattern color=corecolor, pattern=north east lines] (bottom_left) rectangle (bottom_right);
+                \fill [pattern color=corecolor, pattern=north east lines] (top_left) rectangle(top_right);
             \else
-                \node (chapter) [below=-12.5cm of background.north] 
+                \node (chapter) [below=-12.5cm of background.north]
                 {
                     \ifx\noimage\undefined
                         \includegraphics[width=\paperwidth]{chapter-intro.png}
@@ -168,51 +232,115 @@
     \end{tikzpicture}
     \else
     \begin{tikzpicture}
-        \node (background) at (0, 0) {%
+        \pgfdeclarelayer{background}
+        \pgfdeclarelayer{titleimage}
+        \pgfdeclarelayer{logos}
+        \pgfdeclarelayer{text}
+        \pgfsetlayers{background,titleimage,main,logos,text}
+        \begin{pgfonlayer}{background}
             \ifx\noimage\undefined
-                \includegraphics[width=\paperwidth, height=\paperheight]{frontpage.png}
-            \fi
-        };
-        \node (title) [below=1cm of background.north] {%
-            \ifx\noimage\undefined
-                \includegraphics[width=\paperwidth]{\titlelogo}
-            \else
-                \fontsize{80pt}{100pt}\headerfont\color{black}SHADOWRUN\vspace{40pt}
-            \fi
-        };
-        \node (holostreets) [above=1.5cm of background.south] {%
-            \ifx\noimage\undefined
-                \includegraphics[width=12cm]{holostreets.png}
-            \fi
-        };
-        \node (legaltext) [below=0cm of holostreets.south] {
-            \ifx\noimage\undefined
-                \parbox{16cm}{\centering\footnotesize\color{gray}Shadowrun, Sixth World, and Matrix, and associated graphics and logos are registered trademarks and/or trademarks of The Topps Company, Inc., in the United States and/or other countries. Catalyst Game Labs and the Catalyst Game Labs logo are trademarks of InMediaRes Productions, LLC.}
-            \else
-                \parbox{16cm}{\centering This document is in NO IMAGES MODE. You probably shouldn't publish it as-is.}
-            \fi
-        };
-        \node (titletext) [below=0cm of title.south] {%
-            \parbox{20cm}{
-                \centering\fontsize{40pt}{60pt}\headerfont
-                \ifx\noimage\undefined
-                    \color{white}
+                \ifdefined\titlepageseamless
+                    \ifdefined\titleimage
+                        \node[rectangle,fill=black,draw,minimum width=\paperwidth,minimum height=\paperheight] (background) at (0, 0) {};% Use regular background if we are using seamless title page with a title image, since it won't be visible and is much smaller.
+                    \else
+                        \node (background) at (0, 0) {
+                            \includegraphics[width=\paperwidth, height=\paperheight]{frontpage.png}
+                        };
+                    \fi
                 \else
-                    \color{black}
+                    \node (background) at (0, 0) {
+                        \includegraphics[width=\paperwidth, height=\paperheight]{frontpage.png}
+                    };
                 \fi
-                \MakeUppercase{\thetitle}
-            }
-        };
-        \ifdefined\titleimage
-            \node (bottom) [shape=coordinate, below=0cm of holostreets.north] {};
-            \node (top) [shape=coordinate, below=0.5cm of titletext.south] {};
-            \pgfextracty{\titleimageheight}{\pgfpointdiff{\pgfpointanchor{bottom}{center}}{\pgfpointanchor{top}{center}}}
-            \node (titlelogo) [below=0.5cm of top] {%
-                \ifx\noimage\undefined
-                    \includegraphics[height=\titleimageheight]{\titleimage}
-                \fi
+            \fi
+        \end{pgfonlayer}
+        \useasboundingbox (background.south east) rectangle (background.north west);
+        \ifx\noimage\undefined
+            \begin{pgfonlayer}{logos}
+                \node (title) [below=0.5cm of background.north] {
+                    \includegraphics[width=\paperwidth]{\titlelogo}
+                };
+                \node (holostreets) [above=1.475cm of background.south] {
+                    \includegraphics[width=12cm]{holostreets.png}
+                };
+            \end{pgfonlayer}
+        	\ifx\nocgllogo\undefined
+                \begin{pgfonlayer}{text}
+    		        \node (legaltext) [above right=0.7925cm and -5cm of background.south] {
+    		            \parbox{13.5cm}{\footnotesize\color{gray}\shadowrunlegaltext}
+    		        };
+                \end{pgfonlayer}
+                \begin{pgfonlayer}{logos}
+    		        \node (catalystlogo) [above right=0.7675cm and 2.2cm of background.south west] {
+    		        	\includegraphics[width=2.2cm]{Catalyst Logo Revised July 2009.png}
+    		        };
+                \end{pgfonlayer}
+		    \else
+                \begin{pgfonlayer}{text}
+    		    	\node (legaltext) [above=0.7925 of background.south] {
+    		    		\parbox{16cm}{\centering \footnotesize\color{gray}\shadowrunlegaltext}
+    		    	};
+                \end{pgfonlayer}
+		    \fi
+        \else
+            \begin{pgfonlayer}{logos}
+                \node (title) [below=1cm of background.north] {
+                    \fontsize{80pt}{100pt}\titlefont\color{black}SHADOWRUN\vspace{40pt}
+                };
+                \node (holostreets) [above=1.475cm of background.south]{};
+            \end{pgfonlayer}
+            \begin{pgfonlayer}{text}
+    	        \node (legaltext) [above=2cm of background.south] {
+    	        	\parbox{16cm}{\centering This document is in NO IMAGES MODE. You probably shouldn't publish it as-is.}
+    	        };
+            \end{pgfonlayer}
+        \fi
+        \begin{pgfonlayer}{text}
+            \node (titletext) [below=-0.75cm of title.south] {
+                \parbox{20cm}{
+                    \centering\fontsize{40pt}{60pt}\titlefont
+                    \ifx\noimage\undefined
+                        \color{white}
+                    \else
+                        \color{black}
+                    \fi
+                    \MakeUppercase{\thetitle}
+                }
+            };
+        \end{pgfonlayer}
+        \ifdefined\titlepageseamless
+            \node (titlebackground-top) [above=-1.375cm of titletext.south] {
+                \includegraphics[width=\paperwidth]{chapter-intro.png}
+            };
+            \node (titlebackground-bottom) [below=-4.5cm of background.south] {
+                \includegraphics[width=\paperwidth,angle=180,origin=c]{chapter-intro.png}
             };
         \fi
+        \begin{pgfonlayer}{titleimage}
+            \ifdefined\titleimage
+                \ifdefined\titlepageseamless
+                    \node (bottom) [shape=coordinate, below=2.5cm of holostreets.north] {};
+                    \node (top) [shape=coordinate, below=1cm of titletext.north] {};
+                    \pgfextracty{\titleimageheight}{\pgfpointdiff{\pgfpointanchor{bottom}{center}}{\pgfpointanchor{top}{center}}}
+                    \node (titlelogo) [below=0cm of top.south] {
+                        \adjustbox{
+                            min size={\paperwidth}{\titleimageheight},
+                            Clip*={0.5\width - 0.5\paperwidth} {0.5\totalheight - 0.5\titleimageheight}
+                            {0.5\width + 0.5\paperwidth} {0.5\totalheight + 0.5\titleimageheight}
+                        }{
+                            \includegraphics[max size={\paperwidth}{\titleimageheight}]{\titleimage}
+                        }
+                    };
+                \else
+                    \node (bottom) [shape=coordinate, below=0.5cm of holostreets.north] {};
+                    \node (top) [shape=coordinate, below=0.2cm of titletext.south] {};
+                    \pgfextracty{\titleimageheight}{\pgfpointdiff{\pgfpointanchor{bottom}{center}}{\pgfpointanchor{top}{center}}}
+                    \node (titlelogo) [below=0.2cm of top] {
+                        \includegraphics[height=\titleimageheight]{\titleimage}
+                    };
+                \fi
+            \fi
+        \end{pgfonlayer}
     \end{tikzpicture}
     \fi
     }
@@ -239,17 +367,12 @@
 
 \renewenvironment{FlushLeft}{%
    \topsep=0pt
-   \partopsep=0pt 
+   \partopsep=0pt
    \trivlist%
    \RaggedRight\item\relax
    }{%
    \endtrivlist%
 }
-
-\setmainfont{Shadowrun}
-\setmonofont{Decker}
-\newfontfamily\headerfont{Mustica Pro Semi-Bold}
-\newfontfamily\tablefont{Creato Display}
 
 \def\headerrule{}
 \newlength{\postheaderlength}
@@ -266,7 +389,6 @@
 \titlespacing{\subsection}{0pt}{8pt plus 8pt minus 8pt}{\postheaderlength}
 \titlespacing{\subsubsection}{0pt}{8pt plus 8pt minus 8pt}{\postheaderlength}
 
-\ProcessOptions\relax
 
 \input{environments.tex}
 
@@ -276,24 +398,34 @@
     \InsertMark{drawBackground}{1}
     \InsertMark{drawPageNumber}{0}
 
-    \fancyhead{}
-    \fancyfoot{}
-    \fancyfoot[LO]{\headerfont\color{corecolor}\MakeUppercase{\FirstMark{chapter}\space//\space\large\LastMark{section}}}
-    \fancyfoot[RE]{\headerfont\color{corecolor}\MakeUppercase{\large\LastMark{section}\space//\space\normalsize\FirstMark{chapter}}}
+	\fancypagestyle{plain}
+	{
+    	\fancyhf{}
+    	\fancyfoot[LO]{\headerfont\color{corecolor}\MakeUppercase{\FirstMark{chapter}\space//\space\large\LastMark{section}}}
+    	\fancyfoot[RE]{\headerfont\color{corecolor}\MakeUppercase{\large\LastMark{section}\space//\space\normalsize\FirstMark{chapter}}}
+	}
 
-    \pagestyle{fancy}
+	\fancypagestyle{titlepage}[plain]
+	{
+		\fancyhf{}
+	}
+
+    \pagestyle{plain}
 }
 
-
-
-\renewcommand{\maketitle}
+\renewcommand*{\maketitle}
 {
-\InsertMark{drawPageNumber}{0}
-\InsertMark{drawBackground}{0}
-\null
-\clearpage
-\InsertMark{drawBackground}{1}
-\InsertMark{drawPageNumber}{1}
+    \begin{titlepage}
+        \pagenumbering{Alph}
+    	\thispagestyle{titlepage}
+    	\InsertMark{drawPageNumber}{0}
+    	\InsertMark{drawBackground}{0}
+    	\null
+    	\clearpage
+    	\InsertMark{drawBackground}{1}
+    	\InsertMark{drawPageNumber}{1}
+        \pagenumbering{arabic}
+    \end{titlepage}
 }
 
 \pretocmd{\tableofcontents}
@@ -303,12 +435,16 @@
 
 \apptocmd{\tableofcontents}
 {
-    \cleardoublepage
+    \ifdefined\openingAny
+        \clearpage
+    \else
+        \cleardoublepage
+    \fi
     \beginnumbering
 }{}{}
 
 \newcommand{\beginnumbering}
 {
-    \InsertMark{drawPageNumber}{1}    
+    \InsertMark{drawPageNumber}{1}
     \setcounter{page}{1}
 }
