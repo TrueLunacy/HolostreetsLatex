@@ -236,7 +236,15 @@
         \begin{pgfonlayer}{background}
             \node (background) at (0, 0) {%
                 \ifx\noimage\undefined
-                    \includegraphics[width=\paperwidth, height=\paperheight]{frontpage.png}
+                    \ifdefined\titlepageseamless
+                        \ifdefined\titleimage
+                            \includegraphics[width=\paperwidth, height=\paperheight]{background-left.png} % Use regular background if we are using seamless title page with a title image, since it won't be visible and is much smaller.
+                        \else
+                            \includegraphics[width=\paperwidth, height=\paperheight]{frontpage.png}
+                        \fi
+                    \else
+                        \includegraphics[width=\paperwidth, height=\paperheight]{frontpage.png}
+                    \fi
                 \fi
             };
         \end{pgfonlayer}
