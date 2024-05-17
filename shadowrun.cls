@@ -3,39 +3,39 @@
 
 % Declaration of options
 
-\DeclareOption{purple}{\def\themeColour{purple}}
-\DeclareOption{red}{\def\themeColour{red}}
-\DeclareOption{blue}{\def\themeColour{blue}}
+\DeclareOption{purple}{\def\@themeColour{purple}}
+\DeclareOption{red}{\def\@themeColour{red}}
+\DeclareOption{blue}{\def\@themeColour{blue}}
 
-\DeclareOption{titlepage-seamless}{\def\titlepageseamless}
-\DeclareOption{titlepage-no-cgl}{\def\titlepagenocgl}
+\DeclareOption{titlepage-seamless}{\def\@titlepageseamless}
+\DeclareOption{titlepage-no-cgl}{\def\@titlepagenocgl}
 \DeclareOption{no-images}{
-    \def\noimage
-    \undef{\titlepageseamless}
-    \def\titlepagenocgl
+    \def\@noimage
+    \undef{\@titlepageseamless}
+    \def\@titlepagenocgl
 }
 
-\DeclareOption{no-cgl}{\def\nocgllogo}
+\DeclareOption{no-cgl}{\def\@nocgllogo}
 
-\DeclareOption{logo-6e}{\def\titlelogo{images/logos/Shadowrun 6 Logo.png}}
-\DeclareOption{logo-5e}{\def\titlelogo{images/logos/Shadowrun 5 Logo.png}}
-\DeclareOption{logo-4e}{\def\titlelogo{images/logos/Shadowrun 4 Logo.png}}
-\DeclareOption{logo-3e}{\def\titlelogo{images/logos/Shadowrun 3 Logo.png}}
-\DeclareOption{logo-2e}{\def\titlelogo{images/logos/Shadowrun 1-2 Logo.png}}
-\DeclareOption{logo-1e}{\def\titlelogo{images/logos/Shadowrun 1-2 Logo.png}}
+\DeclareOption{logo-6e}{\def\@titlelogo{images/logos/Shadowrun 6 Logo.png}}
+\DeclareOption{logo-5e}{\def\@titlelogo{images/logos/Shadowrun 5 Logo.png}}
+\DeclareOption{logo-4e}{\def\@titlelogo{images/logos/Shadowrun 4 Logo.png}}
+\DeclareOption{logo-3e}{\def\@titlelogo{images/logos/Shadowrun 3 Logo.png}}
+\DeclareOption{logo-2e}{\def\@titlelogo{images/logos/Shadowrun 1-2 Logo.png}}
+\DeclareOption{logo-1e}{\def\@titlelogo{images/logos/Shadowrun 1-2 Logo.png}}
 
-\DeclareOption{font-6e-freealt}{\def\fontSet{font-6e-freealt}}
-\DeclareOption{font-6e}{\def\fontSet{font-6e}}
-\DeclareOption{font-5e-freealt}{\def\fontSet{font-5e-freealt}}
-\DeclareOption{font-5e}{\def\fontSet{font-5e}}
+\DeclareOption{font-6e-freealt}{\def\@fontSet{font-6e-freealt}}
+\DeclareOption{font-6e}{\def\@fontSet{font-6e}}
+\DeclareOption{font-5e-freealt}{\def\@fontSet{font-5e-freealt}}
+\DeclareOption{font-5e}{\def\@fontSet{font-5e}}
 
 \DeclareOption{openany}{
     \PassOptionsToClass{openany}{book}
-    \def\openingAny
+    \def\@openingAny
 }
 \DeclareOption{openright}{
     \PassOptionsToClass{openright}{book}
-    \def\openingRight
+    \def\@openingRight
 }
 
 \DeclareOption*{\PackageWarning{shadowrun}{Unknown ‘\CurrentOption’}}
@@ -85,54 +85,54 @@
 \definecolor{tablebackground}{RGB}{235, 234, 229}
 \definecolor{tablebackground2}{RGB}{224, 224, 217}
 
-\ifthenelse{\equal{\themeColour}{purple}}
+\ifthenelse{\equal{\@themeColour}{purple}}
 {
     \colorlet{corecolor}{srpurple}
     \colorlet{chaptercolor}{white}
     \colorlet{sectioncolor}{srpurple}
     \colorlet{subsectioncolor}{black}
-    \def\logo{images/SR6 logo.png}
+    \def\@logo{images/SR6 logo.png}
 }{}
-\ifthenelse{\equal{\themeColour}{red}}
+\ifthenelse{\equal{\@themeColour}{red}}
 {
     \colorlet{corecolor}{srred}
     \colorlet{chaptercolor}{white}
     \colorlet{sectioncolor}{srred}
     \colorlet{subsectioncolor}{black}
-    \def\logo{images/SR6 logo-red.png}
+    \def\@logo{images/SR6 logo-red.png}
 }{}
-\ifthenelse{\equal{\themeColour}{blue}}
+\ifthenelse{\equal{\@themeColour}{blue}}
 {
     \colorlet{corecolor}{srblue}
     \colorlet{chaptercolor}{white}
     \colorlet{sectioncolor}{srblue}
     \colorlet{subsectioncolor}{black}
-    \def\logo{images/SR6 logo-blue.png}
+    \def\@logo{images/SR6 logo-blue.png}
 }{}
 
-\ifdefined\noimage
+\ifdefined\@noimage
     \colorlet{chaptercolor}{black}
 \fi
 
-\ifthenelse{\equal{\fontSet}{font-6e-freealt}}
+\ifthenelse{\equal{\@fontSet}{font-6e-freealt}}
 {
     \setfontfamily\titlefont{Mustica Pro Semi-Bold}
     \setfontfamily\headerfont{Mustica Pro Semi-Bold}
     \setfontfamily\tablefont{Creato Display}
 }{}
-\ifthenelse{\equal{\fontSet}{font-6e}}
+\ifthenelse{\equal{\@fontSet}{font-6e}}
 {
     \setfontfamily\titlefont{Njord Alternate}
     \setfontfamily\headerfont{Njord Regular}
     \setfontfamily\tablefont{Amplitude Medium}
 }{}
-\ifthenelse{\equal{\fontSet}{font-5e-freealt}}
+\ifthenelse{\equal{\@fontSet}{font-5e-freealt}}
 {
     \setfontfamily\titlefont{Squares Bold}
     \setfontfamily\headerfont{Squares Bold}
     \setfontfamily\tablefont{Univers Condensed Bold}
 }{}
-\ifthenelse{\equal{\fontSet}{font-5e}}
+\ifthenelse{\equal{\@fontSet}{font-5e}}
 {
     \setfontfamily\titlefont{Armadura Solid}
     \setfontfamily\headerfont{Armadura Solid}
@@ -160,7 +160,7 @@
 
 \renewcommand\arraystretch{1.2}
 
-\ifx\noimage\undefined
+\ifx\@noimage\undefined
     \def\titleimage{exampleimage.jpg}
 \fi
 
@@ -179,7 +179,7 @@
     \ifodd\LastMark{drawBackground}
     \begin{tikzpicture}
         \node (background) at (0, 0) {%
-        \ifx\noimage\undefined
+        \ifx\@noimage\undefined
             \ifodd\value{page}
             \includegraphics[width=\paperwidth,height=\paperheight]{images/background-left.png}
             \else
@@ -191,12 +191,12 @@
             \ifodd\FirstMark{isChapter}
                 \node (chapter) [below=0cm of background.north]
                 {
-                    \ifx\noimage\undefined
+                    \ifx\@noimage\undefined
                         \includegraphics[width=\paperwidth]{images/chapter-intro.png}
                     \fi
                 };
-                \ifx\noimage\undefined
-                    \node (logo) [below=2.5cm of chapter.north]{{\includegraphics[height=10.5cm]{\logo}}};
+                \ifx\@noimage\undefined
+                    \node (logo) [below=2.5cm of chapter.north]{{\includegraphics[height=10.5cm]{\@logo}}};
                 \else
                     \node (logo) at (0, 0) {};
                 \fi
@@ -210,14 +210,14 @@
             \else
                 \node (chapter) [below=-12.5cm of background.north]
                 {
-                    \ifx\noimage\undefined
+                    \ifx\@noimage\undefined
                         \includegraphics[width=\paperwidth]{images/chapter-intro.png}
                     \fi
                 };
                 \node (logo) [above right=-0.8cm and 1cm of chapter.south west]
                 {
-                    \ifx\noimage\undefined
-                        \includegraphics[width=4cm]{\logo}
+                    \ifx\@noimage\undefined
+                        \includegraphics[width=4cm]{\@logo}
                     \fi
                 };
                 \ifodd\LastMark{drawPageNumber}
@@ -238,8 +238,8 @@
         \pgfdeclarelayer{text}
         \pgfsetlayers{background,titleimage,main,logos,text}
         \begin{pgfonlayer}{background}
-            \ifx\noimage\undefined
-                \ifdefined\titlepageseamless
+            \ifx\@noimage\undefined
+                \ifdefined\@titlepageseamless
                     \ifdefined\titleimage
                         \node[rectangle,fill=black,draw,minimum width=\paperwidth,minimum height=\paperheight] (background) at (0, 0) {};% Use regular background if we are using seamless title page with a title image, since it won't be visible and is much smaller.
                     \else
@@ -255,16 +255,16 @@
             \fi
         \end{pgfonlayer}
         \useasboundingbox (background.south east) rectangle (background.north west);
-        \ifx\noimage\undefined
+        \ifx\@noimage\undefined
             \begin{pgfonlayer}{logos}
                 \node (title) [below=0.5cm of background.north] {
-                    \includegraphics[width=\paperwidth]{\titlelogo}
+                    \includegraphics[width=\paperwidth]{\@titlelogo}
                 };
                 \node (holostreets) [above=1.475cm of background.south] {
                     \includegraphics[width=12cm]{holostreets.png}
                 };
             \end{pgfonlayer}
-        	\ifx\nocgllogo\undefined
+        	\ifx\@nocgllogo\undefined
                 \begin{pgfonlayer}{text}
     		        \node (legaltext) [above right=0.7925cm and -5cm of background.south] {
     		            \parbox{13.5cm}{\footnotesize\color{gray}\shadowrunlegaltext}
@@ -299,7 +299,7 @@
             \node (titletext) [below=-0.75cm of title.south] {
                 \parbox{20cm}{
                     \centering\fontsize{40pt}{60pt}\titlefont
-                    \ifx\noimage\undefined
+                    \ifx\@noimage\undefined
                         \color{white}
                     \else
                         \color{black}
@@ -308,7 +308,7 @@
                 }
             };
         \end{pgfonlayer}
-        \ifdefined\titlepageseamless
+        \ifdefined\@titlepageseamless
             \node (titlebackground-top) [above=-1.375cm of titletext.south] {
                 \includegraphics[width=\paperwidth]{images/chapter-intro.png}
             };
@@ -318,11 +318,11 @@
         \fi
         \begin{pgfonlayer}{titleimage}
             \ifdefined\titleimage
-                \ifdefined\titlepageseamless
+                \ifdefined\@titlepageseamless
                     \node (bottom) [shape=coordinate, below=2.5cm of holostreets.north] {};
                     \node (top) [shape=coordinate, below=1cm of titletext.north] {};
                     \pgfextracty{\titleimageheight}{\pgfpointdiff{\pgfpointanchor{bottom}{center}}{\pgfpointanchor{top}{center}}}
-                    \node (titlelogo) [below=0cm of top.south] {
+                    \node (@titlelogo) [below=0cm of top.south] {
                         \adjustbox{
                             min size={\paperwidth}{\titleimageheight},
                             Clip*={0.5\width - 0.5\paperwidth} {0.5\totalheight - 0.5\titleimageheight}
@@ -335,7 +335,7 @@
                     \node (bottom) [shape=coordinate, below=0.5cm of holostreets.north] {};
                     \node (top) [shape=coordinate, below=0.2cm of titletext.south] {};
                     \pgfextracty{\titleimageheight}{\pgfpointdiff{\pgfpointanchor{bottom}{center}}{\pgfpointanchor{top}{center}}}
-                    \node (titlelogo) [below=0.2cm of top] {
+                    \node (@titlelogo) [below=0.2cm of top] {
                         \includegraphics[height=\titleimageheight]{\titleimage}
                     };
                 \fi
@@ -374,7 +374,7 @@
    \endtrivlist%
 }
 
-\def\headerrule{}
+\def\@headerrule{}
 \newlength{\postheaderlength}
 \setlength{\postheaderlength}{4pt}
 
@@ -382,9 +382,9 @@
 
 \titleformat{\chapter}[display]{\centering\color{chaptercolor}\fontsize{60pt}{70pt}\headerfont}{}{0pt}{\nullify}
 \titlespacing{\chapter}{0pt}{130pt}{90pt}
-\titleformat{\section}[hang]{\color{sectioncolor}\headerfont\huge\RaggedRight}{}{0pt}{\MakeUppercase}[\ifdefined\headerrule\hrule\fi]
-\titleformat{\subsection}[hang]{\color{subsectioncolor}\headerfont\Large\RaggedRight}{}{0pt}{\MakeUppercase}[\ifdefined\headerrule\hrule\fi]
-\titleformat{\subsubsection}[hang]{\color{subsectioncolor}\headerfont\normalsize\RaggedRight}{}{0pt}{\MakeUppercase}[\ifdefined\headerrule\hrule\fi]
+\titleformat{\section}[hang]{\color{sectioncolor}\headerfont\huge\RaggedRight}{}{0pt}{\MakeUppercase}[\ifdefined\@headerrule\hrule\fi]
+\titleformat{\subsection}[hang]{\color{subsectioncolor}\headerfont\Large\RaggedRight}{}{0pt}{\MakeUppercase}[\ifdefined\@headerrule\hrule\fi]
+\titleformat{\subsubsection}[hang]{\color{subsectioncolor}\headerfont\normalsize\RaggedRight}{}{0pt}{\MakeUppercase}[\ifdefined\@headerrule\hrule\fi]
 \titlespacing{\section}{0pt}{8pt plus 8pt minus 8pt}{\postheaderlength}
 \titlespacing{\subsection}{0pt}{8pt plus 8pt minus 8pt}{\postheaderlength}
 \titlespacing{\subsubsection}{0pt}{8pt plus 8pt minus 8pt}{\postheaderlength}
@@ -435,7 +435,7 @@
 
 \apptocmd{\tableofcontents}
 {
-    \ifdefined\openingAny
+    \ifdefined\@openingAny
         \clearpage
     \else
         \cleardoublepage
