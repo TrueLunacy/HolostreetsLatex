@@ -10,7 +10,9 @@ This package overrides the default `\maketitle` and `\tableofcontents` commands.
 
 You can override the title image by redefining the `\titleimage` command.
 
-You can remove the logo for Catalyst Game Labs from the title page by using the `no-cgl` class option.
+You can remove the logo for Catalyst Game Labs from the title page by using the `titlepage-no-cgl` class option.
+
+You can add the chapter background images to the title page to make it seamless with the title image by using the `titlepage-seamless` class option.
 
 You can change the colour scheme, Shadowrun title logo, and/or font setup with class options:
 
@@ -54,7 +56,7 @@ The following environments are defined:
 
 ## Requirements
 
-The sty file requires the following LaTeX packages: anyfontsize, array, atbegshi, background, colortbl, enumitem, etoc, etoolbox, etoolbox, fancyhdr, float, fontspec, geometry, mdframed, multirow, ragged2e, setspace, stfloats, tabularx, tikz, titlesec, titling, transparent, xcolor.
+The sty file requires the following LaTeX packages: adjustbox, anyfontsize, array, atbegshi, background, colortbl, enumitem, etoc, etoolbox, etoolbox, fancyhdr, float, fontspec, geometry, mdframed, multirow, ragged2e, setspace, stfloats, tabularx, tikz, titlesec, titling, transparent, xcolor.
 
 All of these packages are available on CTAN and are included in the default Arch Linux TeX live distribution.
 

@@ -34,6 +34,7 @@
 \RequirePackage{setspace}
 \RequirePackage{stfloats}
 \RequirePackage{atbegshi}
+\RequirePackage[export]{adjustbox}
 
 \renewcommand{\topfraction}{.85}
 \renewcommand{\bottomfraction}{.7}
@@ -84,13 +85,8 @@
     \def\logo{SR6 logo-blue.png}
 }
 
-\DeclareOption{no-images}
-{
-    \colorlet{chaptercolor}{black}
-    \def\noimage
-}
-
-\DeclareOption{no-cgl}{\def\nocgllogo}
+\DeclareOption{titlepage-seamless}{\def\titlepageseamless}
+\DeclareOption{titlepage-no-cgl}{\def\titlepagenocgl}
 
 \DeclareOption{logo-6e}{\def\titlelogo{logos/Shadowrun 6 Logo.png}} % default logo SR6
 \DeclareOption{logo-5e}{\def\titlelogo{logos/Shadowrun 5 Logo.png}}
@@ -124,11 +120,20 @@
 
 \DeclareOption*{\PackageWarning{shadowrun}{Unknown ‘\CurrentOption’}}
 
-\ExecuteOptions{purple,logo-6e,font-6e-freealt}
-
 \renewcommand\arraystretch{1.2}
 
 \def\titleimage{exampleimage.jpg}
+
+\DeclareOption{no-images}
+{
+    \colorlet{chaptercolor}{black}
+    \def\noimage
+    \undef{\titlepageseamless}
+    \def\titlepagenocgl
+    \undef{\titleimage}
+}
+
+\ExecuteOptions{purple,logo-6e,font-6e-freealt}
 
 \newcommand{\TitleImage}[1]{\def\titleimage{#1}}
 
@@ -198,62 +203,105 @@
     \end{tikzpicture}
     \else
     \begin{tikzpicture}
-        \node (background) at (0, 0) {%
-            \ifx\noimage\undefined
-                \includegraphics[width=\paperwidth, height=\paperheight]{frontpage.png}
-            \fi
-        };
-        \node (title) [below=1cm of background.north] {%
-            \ifx\noimage\undefined
-                \includegraphics[width=\paperwidth]{\titlelogo}
-            \else
-                \fontsize{80pt}{100pt}\titlefont\color{black}SHADOWRUN\vspace{40pt}
-            \fi
-        };
-        \node (holostreets) [above=1.4075cm of background.south] {%
-            \ifx\noimage\undefined
-                \includegraphics[width=12cm]{holostreets.png}
-            \fi
-        };
-        \ifx\noimage\undefined
-        	\ifx\nocgllogo\undefined
-		        \node (legaltext) [below right=-0.25cm and 1cm of holostreets.south west] {
-		            \parbox{13.5cm}{\footnotesize\color{gray}\shadowrunlegaltext}
-		        };
-		        \node (catalystlogo) [above right=0.4675cm and 2.2cm of background.south west] {
-		        	\includegraphics[width=2.2cm]{Catalyst Logo Revised July 2009.png}
-		        };
-		    \else
-		    	\node (legaltext) [below=-0.25cm of holostreets.south] {
-		    		\parbox{16cm}{\centering \footnotesize\color{gray}\shadowrunlegaltext}
-		    	};
-		    \fi
-        \else
-	        \node (legaltext) [below=-0.25cm of holostreets.south] {
-	        	\parbox{16cm}{\centering This document is in NO IMAGES MODE. You probably shouldn't publish it as-is.}
-	        };
-        \fi
-        \node (titletext) [below=-1cm of title.south] {%
-            \parbox{20cm}{
-                \centering\fontsize{40pt}{60pt}\titlefont
+        \pgfdeclarelayer{background}
+        \pgfdeclarelayer{titleimage}
+        \pgfdeclarelayer{logos}
+        \pgfdeclarelayer{text}
+        \pgfsetlayers{background,titleimage,main,logos,text}
+        \begin{pgfonlayer}{background}
+            \node (background) at (0, 0) {%
                 \ifx\noimage\undefined
-                    \color{white}
-                \else
-                    \color{black}
-                \fi
-                \MakeUppercase{\thetitle}
-            }
-        };
-        \ifdefined\titleimage
-            \node (bottom) [shape=coordinate, below=0.5cm of holostreets.north] {};
-            \node (top) [shape=coordinate, below=0.2cm of titletext.south] {};
-            \pgfextracty{\titleimageheight}{\pgfpointdiff{\pgfpointanchor{bottom}{center}}{\pgfpointanchor{top}{center}}}
-            \node (titlelogo) [below=0.2cm of top] {%
-                \ifx\noimage\undefined
-                    \includegraphics[height=\titleimageheight]{\titleimage}
+                    \includegraphics[width=\paperwidth, height=\paperheight]{frontpage.png}
                 \fi
             };
+        \end{pgfonlayer}
+        \useasboundingbox (background.south east) rectangle (background.north west);
+        \ifx\noimage\undefined
+            \begin{pgfonlayer}{logos}
+                \node (title) [below=0.5cm of background.north] {
+                    \includegraphics[width=\paperwidth]{\titlelogo}
+                };
+                \node (holostreets) [above=1.475cm of background.south] {
+                    \includegraphics[width=12cm]{holostreets.png}
+                };
+            \end{pgfonlayer}
+        	\ifx\nocgllogo\undefined
+                \begin{pgfonlayer}{text}
+    		        \node (legaltext) [above right=0.7925cm and -5cm of background.south] {
+    		            \parbox{13.5cm}{\footnotesize\color{gray}\shadowrunlegaltext}
+    		        };
+                \end{pgfonlayer}
+                \begin{pgfonlayer}{logos}
+    		        \node (catalystlogo) [above right=0.7675cm and 2.2cm of background.south west] {
+    		        	\includegraphics[width=2.2cm]{Catalyst Logo Revised July 2009.png}
+    		        };
+                \end{pgfonlayer}
+		    \else
+                \begin{pgfonlayer}{text}
+    		    	\node (legaltext) [above=0.7925 of background.south] {
+    		    		\parbox{16cm}{\centering \footnotesize\color{gray}\shadowrunlegaltext}
+    		    	};
+                \end{pgfonlayer}
+		    \fi
+        \else
+            \begin{pgfonlayer}{logos}
+                \node (title) [below=1cm of background.north] {
+                    \fontsize{80pt}{100pt}\titlefont\color{black}SHADOWRUN\vspace{40pt}
+                };
+                \node (holostreets) [above=1.475cm of background.south]{};
+            \end{pgfonlayer}
+            \begin{pgfonlayer}{text}
+    	        \node (legaltext) [above=2cm of background.south] {
+    	        	\parbox{16cm}{\centering This document is in NO IMAGES MODE. You probably shouldn't publish it as-is.}
+    	        };
+            \end{pgfonlayer}
         \fi
+        \begin{pgfonlayer}{text}
+            \node (titletext) [below=-0.75cm of title.south] {
+                \parbox{20cm}{
+                    \centering\fontsize{40pt}{60pt}\titlefont
+                    \ifx\noimage\undefined
+                        \color{white}
+                    \else
+                        \color{black}
+                    \fi
+                    \MakeUppercase{\thetitle}
+                }
+            };
+        \end{pgfonlayer}
+        \ifdefined\titlepageseamless
+            \node (titlebackground-top) [above=-1.375cm of titletext.south] {
+                \includegraphics[width=\paperwidth]{chapter-intro.png}
+            };
+            \node (titlebackground-bottom) [below=-4.5cm of background.south] {
+                \includegraphics[width=\paperwidth,angle=180,origin=c]{chapter-intro.png}
+            };
+        \fi
+        \begin{pgfonlayer}{titleimage}
+            \ifdefined\titleimage
+                \ifdefined\titlepageseamless
+                    \node (bottom) [shape=coordinate, below=4cm of holostreets.north] {};
+                    \node (top) [shape=coordinate, below=0cm of title.south] {};
+                    \pgfextracty{\titleimageheight}{\pgfpointdiff{\pgfpointanchor{bottom}{center}}{\pgfpointanchor{top}{center}}}
+                    \node (titlelogo) [below=0cm of top.south] {
+                        \adjustbox{
+                            min size={\paperwidth}{\titleimageheight},
+                            Clip*={0.5\width - 0.5\paperwidth} {0.5\totalheight - 0.5\titleimageheight}
+                            {0.5\width + 0.5\paperwidth} {0.5\totalheight + 0.5\titleimageheight}
+                        }{
+                            \includegraphics[max size={\paperwidth}{\titleimageheight}]{\titleimage}
+                        }
+                    };
+                \else
+                    \node (bottom) [shape=coordinate, below=0.5cm of holostreets.north] {};
+                    \node (top) [shape=coordinate, below=0.2cm of titletext.south] {};
+                    \pgfextracty{\titleimageheight}{\pgfpointdiff{\pgfpointanchor{bottom}{center}}{\pgfpointanchor{top}{center}}}
+                    \node (titlelogo) [below=0.2cm of top] {
+                        \includegraphics[height=\titleimageheight]{\titleimage}
+                    };
+                \fi
+            \fi
+        \end{pgfonlayer}
     \end{tikzpicture}
     \fi
     }
