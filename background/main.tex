@@ -4,10 +4,12 @@
     angle=0,
     color=black,
     contents={%
+    \makeatletter
     \ifodd\LastMark{drawBackground}
         \input{background/background.tex}
     \else
         \input{background/title.tex}
     \fi
+    \makeatother
     }
 }
