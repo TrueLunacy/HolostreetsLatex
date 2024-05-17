@@ -39,17 +39,17 @@
     \InsertMark{drawBackground}{1}
     \InsertMark{drawPageNumber}{0}
 
-	\fancypagestyle{plain}
-	{
-    	\fancyhf{}
-    	\fancyfoot[LO]{\headerfont\color{corecolor}\MakeUppercase{\FirstMark{chapter}\space//\space\large\LastMark{section}}}
-    	\fancyfoot[RE]{\headerfont\color{corecolor}\MakeUppercase{\large\LastMark{section}\space//\space\normalsize\FirstMark{chapter}}}
-	}
+    \fancypagestyle{plain}
+    {
+        \fancyhf{}
+        \fancyfoot[LO]{\headerfont\color{corecolor}\MakeUppercase{\FirstMark{chapter}\space//\space\large\LastMark{section}}}
+        \fancyfoot[RE]{\headerfont\color{corecolor}\MakeUppercase{\large\LastMark{section}\space//\space\normalsize\FirstMark{chapter}}}
+    }
 
-	\fancypagestyle{titlepage}[plain]
-	{
-		\fancyhf{}
-	}
+    \fancypagestyle{titlepage}[plain]
+    {
+        \fancyhf{}
+    }
 
     \pagestyle{plain}
 }
@@ -58,13 +58,13 @@
 {
     \begin{titlepage}
         \pagenumbering{Alph}
-    	\thispagestyle{titlepage}
-    	\InsertMark{drawPageNumber}{0}
-    	\InsertMark{drawBackground}{0}
-    	\null
-    	\clearpage
-    	\InsertMark{drawBackground}{1}
-    	\InsertMark{drawPageNumber}{1}
+        \thispagestyle{titlepage}
+        \InsertMark{drawPageNumber}{0}
+        \InsertMark{drawBackground}{0}
+        \null
+        \clearpage
+        \InsertMark{drawBackground}{1}
+        \InsertMark{drawPageNumber}{1}
         \pagenumbering{arabic}
     \end{titlepage}
 }
