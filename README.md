@@ -26,6 +26,8 @@ If no options are specified, the default options are `purple`, `logo-6e`, and `f
 
 `no-images` as an option removes rendering images from the output. This can speed up compilation times, but isn't suitable for a final publish.
 
+An example LaTeX file is provided in the example folder, showcasing the features of this class file.
+
 ### Fonts
 
 This template uses five fonts. You can override the font setup as follows.

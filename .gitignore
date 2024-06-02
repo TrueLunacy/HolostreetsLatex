@@ -309,3 +309,5 @@ TSWLatexianTemp*
 *.glstex
 
 *.pdf
+
+build/
