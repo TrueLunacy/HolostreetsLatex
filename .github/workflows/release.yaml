@@ -12,11 +12,13 @@ jobs:
       contents: write
     steps:
     - uses: actions/checkout@v3
-    - run: apt update
-    - run: apt install -yy imagemagick zip
-    - run: build-release.sh
+    - run: sudo apt update
+    - run: sudo apt install -yy imagemagick zip
+    - run: ./build-release.sh
     - uses: ncipollo/release-action@v1
       with:
         artifacts: "build/holostreetsLaTeX-overleaf.zip"
         prerelease: true
         body: "Prerelease build of Holostreets LaTeX"
+        commit: "master"
+        tag: "nightly"
