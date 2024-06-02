@@ -68,7 +68,7 @@
         \end{pgfonlayer}
     \fi
     \begin{pgfonlayer}{text}
-        \node (titletext) [below=-0.75cm of title.south] {
+        \node (titletext) [below=\@titleimagegap of title.south] {
             \parbox{20cm}{
                 \centering\fontsize{40pt}{60pt}\titlefont
                 \ifx\@noimage\undefined
@@ -93,22 +93,22 @@
             \ifdefined\@titlepageseamless
                 \node (bottom) [shape=coordinate, below=2.5cm of holostreets.north] {};
                 \node (top) [shape=coordinate, below=1cm of titletext.north] {};
-                \pgfextracty{\titleimageheight}{\pgfpointdiff{\pgfpointanchor{bottom}{center}}{\pgfpointanchor{top}{center}}}
+                \pgfextracty{\@titleimageheight}{\pgfpointdiff{\pgfpointanchor{bottom}{center}}{\pgfpointanchor{top}{center}}}
                 \node (@titlelogo) [below=0cm of top.south] {
                     \adjustbox{
-                        min size={\paperwidth}{\titleimageheight},
-                        Clip*={0.5\width - 0.5\paperwidth} {0.5\totalheight - 0.5\titleimageheight}
-                        {0.5\width + 0.5\paperwidth} {0.5\totalheight + 0.5\titleimageheight}
+                        min size={\paperwidth}{\@titleimageheight},
+                        Clip*={0.5\width - 0.5\paperwidth} {0.5\totalheight - 0.5\@titleimageheight}
+                        {0.5\width + 0.5\paperwidth} {0.5\totalheight + 0.5\@titleimageheight}
                     }{
-                        \includegraphics[max size={\paperwidth}{\titleimageheight}]{\titleimage}
+                        \includegraphics[max size={\paperwidth}{\@titleimageheight}]{\titleimage}
                     }
                 };
             \else
                 \node (bottom) [shape=coordinate, below=0.5cm of holostreets.north] {};
                 \node (top) [shape=coordinate, below=0.2cm of titletext.south] {};
-                \pgfextracty{\titleimageheight}{\pgfpointdiff{\pgfpointanchor{bottom}{center}}{\pgfpointanchor{top}{center}}}
+                \pgfextracty{\@titleimageheight}{\pgfpointdiff{\pgfpointanchor{bottom}{center}}{\pgfpointanchor{top}{center}}}
                 \node (@titlelogo) [below=0.2cm of top] {
-                    \includegraphics[height=\titleimageheight]{\titleimage}
+                    \includegraphics[height=\@titleimageheight]{\titleimage}
                 };
             \fi
         \fi

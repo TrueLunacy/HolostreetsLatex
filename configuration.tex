@@ -28,9 +28,9 @@
 \titleformat{\section}[hang]{\color{sectioncolor}\headerfont\huge\RaggedRight}{}{0pt}{\MakeUppercase}[\ifdefined\@headerrule\hrule\fi]
 \titleformat{\subsection}[hang]{\color{subsectioncolor}\headerfont\Large\RaggedRight}{}{0pt}{\MakeUppercase}[\ifdefined\@headerrule\hrule\fi]
 \titleformat{\subsubsection}[hang]{\color{subsectioncolor}\headerfont\normalsize\RaggedRight}{}{0pt}{\MakeUppercase}[\ifdefined\@headerrule\hrule\fi]
-\titlespacing{\section}{0pt}{8pt plus 8pt minus 8pt}{\postheaderlength}
-\titlespacing{\subsection}{0pt}{8pt plus 8pt minus 8pt}{\postheaderlength}
-\titlespacing{\subsubsection}{0pt}{8pt plus 8pt minus 8pt}{\postheaderlength}
+\titlespacing{\section}{0pt}{8pt plus 8pt minus 8pt}{\@postheaderlength}
+\titlespacing{\subsection}{0pt}{8pt plus 8pt minus 8pt}{\@postheaderlength}
+\titlespacing{\subsubsection}{0pt}{8pt plus 8pt minus 8pt}{\@postheaderlength}
 
 
 \AtBeginDocument{
