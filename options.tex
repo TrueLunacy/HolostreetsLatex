@@ -4,15 +4,26 @@
 %
 % Default options are set in shadowrun.cls
 
+% This is a special option we use for when we build overleaf-extractable builds
+% The install script will alter it for the overleaf specific folders
+
 \DeclareOption{purple}{\def\@themeColour{purple}}
 \DeclareOption{red}{\def\@themeColour{red}}
 \DeclareOption{blue}{\def\@themeColour{blue}}
 
-\DeclareOption{titlepage-seamless}{\def\@titlepageseamless{}}
+\DeclareOption{titlepage-seamless}
+{
+    \def\@titlepageseamless{}
+    \ifdefined\@noimage
+        \PackageError{shadowrun}{Cannot use both 'titlepage-seamless' and 'no-images' at the same time}
+    \fi
+}
 \DeclareOption{titlepage-no-cgl}{\def\@titlepagenocgl{}}
 \DeclareOption{no-images}{
     \def\@noimage{}
-    \undef{\@titlepageseamless}
+    \ifdefined\@titlepageseamless
+        \PackageError{shadowrun}{Cannot use both 'titlepage-seamless' and 'no-images' at the same time}
+    \fi
     \def\@titlepagenocgl{}
 }
 
@@ -20,32 +31,32 @@
 
 \DeclareOption{logo-6e}
 {
-    \def\@titlelogo{images/logos/Shadowrun 6 Logo.png}
+    \def\@titlelogo{\@imageLocation{logos/Shadowrun 6 Logo.png}}
     \def\@titleimagegap{-0.75cm}
 }
 \DeclareOption{logo-5e}
 {
-    \def\@titlelogo{images/logos/Shadowrun 5 Logo.png}
+    \def\@titlelogo{\@imageLocation{logos/Shadowrun 5 Logo.png}}
     \def\@titleimagegap{0cm}
 }
 \DeclareOption{logo-4e}
 {
-    \def\@titlelogo{images/logos/Shadowrun 4 Logo.png}
+    \def\@titlelogo{\@imageLocation{logos/Shadowrun 4 Logo.png}}
     \def\@titleimagegap{0cm}
 }
 \DeclareOption{logo-3e}
 {
-    \def\@titlelogo{images/logos/Shadowrun 3 Logo.png}
+    \def\@titlelogo{\@imageLocation{logos/Shadowrun 3 Logo.png}}
     \def\@titleimagegap{-0.3cm}
 }
 \DeclareOption{logo-2e}
 {
-    \def\@titlelogo{images/logos/Shadowrun 1-2 Logo.png}
+    \def\@titlelogo{\@imageLocation{logos/Shadowrun 1-2 Logo.png}}
     \def\@titleimagegap{0cm}
 }
 \DeclareOption{logo-1e}
 {
-    \def\@titlelogo{images/logos/Shadowrun 1-2 Logo.png}
+    \def\@titlelogo{\@imageLocation{logos/Shadowrun 1-2 Logo.png}}
     \def\@titleimagegap{0cm}
 }
 

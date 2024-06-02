@@ -6,9 +6,9 @@
     contents={%
     \makeatletter
     \ifodd\LastMark{drawBackground}
-        \input{background/background.tex}
+        \input{\@inputprefix{background/background.tex}}
     \else
-        \input{background/title.tex}
+        \input{\@inputprefix{background/title.tex}}
     \fi
     \makeatother
     }

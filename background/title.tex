@@ -11,12 +11,12 @@
                     \node[rectangle,fill=black,draw,minimum width=\paperwidth,minimum height=\paperheight] (background) at (0, 0) {};% Use regular background if we are using seamless title page with a title image, since it won't be visible and is much smaller.
                 \else
                     \node (background) at (0, 0) {
-                        \includegraphics[width=\paperwidth, height=\paperheight]{images/frontpage.png}
+                        \includegraphics[width=\paperwidth, height=\paperheight]{\@imageLocation{frontpage.png}}
                     };
                 \fi
             \else
                 \node (background) at (0, 0) {
-                    \includegraphics[width=\paperwidth, height=\paperheight]{images/frontpage.png}
+                    \includegraphics[width=\paperwidth, height=\paperheight]{\@imageLocation{frontpage.png}}
                 };
             \fi
         \else
@@ -30,7 +30,7 @@
                 \includegraphics[width=\paperwidth]{\@titlelogo}
             };
             \node (holostreets) [above=1.475cm of background.south] {
-                \includegraphics[width=12cm]{holostreets.png}
+                \includegraphics[width=12cm]{\@imageLocation{holostreets.png}}
             };
         \end{pgfonlayer}
         \ifx\@nocgllogo\undefined
@@ -41,7 +41,7 @@
             \end{pgfonlayer}
             \begin{pgfonlayer}{logos}
                 \node (catalystlogo) [above right=0.7675cm and 2.2cm of background.south west] {
-                    \includegraphics[width=2.2cm]{images/Catalyst Logo Revised July 2009.png}
+                    \includegraphics[width=2.2cm]{\@imageLocation{Catalyst Logo Revised July 2009.png}}
                 };
             \end{pgfonlayer}
         \else
@@ -82,10 +82,10 @@
     \end{pgfonlayer}
     \ifdefined\@titlepageseamless
         \node (titlebackground-top) [above=-1.375cm of titletext.south] {
-            \includegraphics[width=\paperwidth]{images/chapter-intro.png}
+            \includegraphics[width=\paperwidth]{\@imageLocation{chapter-intro.png}}
         };
         \node (titlebackground-bottom) [below=-4.5cm of background.south] {
-            \includegraphics[width=\paperwidth,angle=180,origin=c]{images/chapter-intro.png}
+            \includegraphics[width=\paperwidth,angle=180,origin=c]{\@imageLocation{chapter-intro.png}}
         };
     \fi
     \begin{pgfonlayer}{titleimage}
