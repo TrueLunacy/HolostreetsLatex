@@ -19,6 +19,8 @@
                     \includegraphics[width=\paperwidth, height=\paperheight]{images/frontpage.png}
                 };
             \fi
+        \else
+            \node (background) at (0, 0) {};
         \fi
     \end{pgfonlayer}
     \useasboundingbox (background.south east) rectangle (background.north west);
@@ -52,7 +54,10 @@
     \else
         \begin{pgfonlayer}{logos}
             \node (title) [below=1cm of background.north] {
-                \fontsize{80pt}{100pt}\titlefont\color{black}SHADOWRUN\vspace{40pt}
+                \parbox{20cm}
+                {
+                    \centering\fontsize{80pt}{100pt}\titlefont\color{black}SHADOWRUN\vspace{40pt}
+                }
             };
             \node (holostreets) [above=1.475cm of background.south]{};
         \end{pgfonlayer}
