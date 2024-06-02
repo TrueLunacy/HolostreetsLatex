@@ -1,61 +1,29 @@
 # Shadowrun LaTeX Template on Overleaf.com
 
-This is how to setup Overleaf with this repository. This assumes you have made a new account and have a new project ready to go.
+**Warning:** Overleaf's free plan has a strict time limit for building LaTeX projects, and large or complex projects may overrun this. If this happens, you must either run the build locally, or purchase an Overleaf paid plan. The no-images mode may help in reducing compile times, but is not suitable for publishing.
 
-## Base Files and Folders to upload
+This guide assumes you have set up an account on Overleaf, and downloaded the required fonts.
 
-Move over the following files and folders:
-```text
-background
-definitions
-images
-commands.tex
-options.tex
-configuration.tex
-packages.tex
-shadowrun.cls
-```
+## Project Upload
 
-After uploading all of those files. Move /background/exampleimage.jpg into the root file directory (So just move it next to commands.tex instead of being inside images folder).
+You can acquire a zipped version of the project [here](https://github.com/TrueLunacy/HolostreetsLatex/releases/tag/nightly). This is built using the latest code at time of download, but compresses some of the image files to be smaller to avoid file size limits.
 
+Create a new project in Overleaf and use this zip file as the base. Overleaf provides a guide for this [here](https://www.overleaf.com/learn/how-to/Uploading_a_project).
 
-## Base Template
-When you create a new file, you will have a `main.tex` copy the following to.Feel free to change `logo-3e` to 4e, 5e, etc. I'm going to show you how to setup -most- of this. There are still a lot of things to do for different font's. 
+## Required Configuration
 
-### main.tex 
-```latex
-\documentclass[logo-3e,purple,font-5e-freealt,titlepage-seamless]{shadowrun}
-\usepackage[utf8]{inputenc}
-\usepackage[english]{babel}
+When you upload this project to Overleaf, the project will fail to build. You must upload all fonts, and change your compiler to LuaTeX before the project will build. You can find the settings for the compiler in the menu for your project.
 
-\title{Your Adventure's Title}
-\author{Your Name}
-\date{May 2024}
+All font files you need must be uploaded to your project and named properly before it will compile. The font must be named exactly what the compiler expects, otherwise the project will fail to build properly. The error log will tell you what font it cannot find, with an error as similar: `Package fontspec error: The font ">MISSING FONT<" cannot be found.`
 
-\begin{document}
-
-\maketitle
-
-\section{Prologue}
-
-\section{How To Use This Book}
-
-\section{Plot Synopsis}
-
-\section{Cast Of Shadows}
-
-\end{document}
-```
-
-## Installing Fonts
-
-When you get this going you need to add the `Shadowrun.tff` and `Decker.tff`. Download from the links below, then put into the base directory (on the same level as `commands.tex`) and name the exactly as I have them display.
-
-[Shadowrun Fonts](http://thor.divnull.com/pub/fonts/Shadowrun-12.zip)
-[Decker Fonts](http://thor.divnull.com/pub/fonts/Decker-12.zip)
-
-For using `font-5e-freealt` in your `main.tex`, then you will need `SquaresBold.otf` and `UniversCondensedBold.ttf`. When you export the font files, you need to find whatever they are named (and they will be named something generic, but you will see them say something like `squares_bold_2234.otf`) and change them to exactly what I have named them above and put them also next to `main.tex` in the file structure.
-
-## Configuring the correct engine
-
-This project used LuaLaTex. Click on Menu in the top left, then down to "Compiler" and change it to LuaLaTex. This will correct all of the compile errors. After doing this, when you compile you -should- be seeing a basic setup render on your right.
+The list of font names as expected is as follows:
+- Shadowrun
+- Decker
+- Mustica Pro Semi-Bold
+- Creato Display
+- Njord Alternate
+- Njord Regular
+- Amplitude Medium
+- Squares Bold
+- Univers Condensed Bold
+- Armadura Solid
