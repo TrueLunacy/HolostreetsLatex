@@ -24,6 +24,18 @@ If no options are specified, the default options are `purple`, `logo-6e`, and `f
 
 `openany` as an option is supported, which allows chapters to open on any page. The default is `openright`, which forces chapters to only open on right pages, as if the file was a book.
 
+`no-images` as an option removes rendering images from the output. This can speed up compilation times, but isn't suitable for a final publish.
+
+### Fonts
+
+This template uses five fonts. You can override the font setup as follows.
+
+- Main font - `\setmainfont{your font}` - The main text font.
+- Monospace font - `\setmonofont{your font}` - The font used in monospace sections, such as Jackpoint chatter.
+- Title font - `\setfontfamily\titlefont{your font}` - The font used by the main title on the titlepage.
+- Header font - `\setfontfamily\headerfont{your font}` - The font used for all headings and chapter titles, including table headings and the bottom of the page current chapter/section reminder.
+- Table font - `\setfontfamily\tablefont{your font}` - The font used for text inside tables and figures.
+
 ### Commands
 
 The following commands are defined:
@@ -83,6 +95,20 @@ Certain fonts must be acquired externally:
 This project uses assets from the Holostreets Shadowrun [Editions Logo Pack](https://drivethrurpg.com/product/433897/shadowrun-holostreets-shadowrun-editions-logo-pack), and the Shadowrun [Single Page Template](https://drivethrurpg.com/product/431512/shadowrun-holostreets-single-page-template). Some of these assets have been modified.
 
 The [default image](https://pixabay.com/illustrations/robot-machine-digital-robots-4120890/) included is royalty-free under the Pixaby Content Licence.
+
+## Common Issues
+
+### Extremely Large PDF files
+
+The image files are not compressed at all when a PDF is made, resulting in an extremely large file. If you are on Linux or otherwise have access to ghostscript, you can use the following command to compress the files.
+
+`gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook -dNOPAUSE -dQUIET -dBATCH -sOutputFile=compressed.pdf main.pdf`
+
+`/ebook` may be replaced with `/screen` for lower resolution output, and `/default` for higher resolution output. Consult the [ghostscript documentation](https://ghostscript.readthedocs.io/en/gs10.0.0/VectorDevices.html#the-family-of-pdf-and-postscript-output-devices) for more information.
+
+### Long Build Time
+
+You can use the `no-images` option to build your project faster. This shortens build time by not including the high-quality images in the document. The layout should be identical to a full build, with the exception of the title page, but you should still check it on a full build before publishing.
 
 ## Licencing
 

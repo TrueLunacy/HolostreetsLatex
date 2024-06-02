@@ -1,6 +1,9 @@
 - test TitleImage functionality
 - modify chatter to be nicer?
 - just get rid of smalltext, don't need it for that one bit
+- fix the bottom-of-page title stuff on some pages, like the TOC
+- author on title page
+- attribution to the layout
 
 - implement weapon, sritem, featurearmour, armour, cyberware, etc.
     - idea of these is that we have a table we can autogenerate with all the stuff
