@@ -51,10 +51,10 @@
 %- 7th: drain
 %- 8th - content
 \newcommand{\combatspell}[8]{
-    \undef\headerrule
+    \undef\@headerrule
     \subsection{#1}
     \vspace{-\@postheaderlength}
-    \def\headerrule{}
+    \def\@headerrule{}
     \begin{FlushLeft}
         {\small\headerfont#2}
         \vspace{2pt plus 2pt minus 2pt}
@@ -147,7 +147,7 @@
     \toks0={#1}%
     \edef\param{\the\toks0}
     \begin{bfseries}
-        #2
+        \raggedright#2
     \end{bfseries}
 
     #3
