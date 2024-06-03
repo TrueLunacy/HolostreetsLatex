@@ -2,6 +2,8 @@
 
 This is a LaTeX template for Holostreets works inspired by the Shadowrun Single Page Template provided by CGL.
 
+A guide to use this template on Overleaf can be found in `Overleaf-Setup.md`
+
 ## Use
 
 This package uses the transparent package supported by pdfTeX and LuaTeX, as well as the fontspec package supported by XeTeX and luaTeX. luaTeX is therefore recommended.
