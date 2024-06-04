@@ -1,0 +1,23 @@
+% first - name
+% second - how many arguments
+% third - tabular column specifier
+% fourth - first row (for column names)
+\newcommand{\newcollection}[4]
+{
+    \makeatletter
+
+    \immediate\write\@auxout{\detokenize{\@writefile{table_#1}{\begin{tabularx}{\textwidth}{#3}}}}
+    \immediate\write\@auxout{\noexpand\@writefile{table_#1}{#4 \\}}
+    \AtEndDocument{\immediate\write\@auxout{\detokenize{\@writefile{table_#1}{\end{tabularx}}}}}
+
+    \expandafter\newcommand\csname #1\endcsname[3]
+    {
+        \write\@auxout{\noexpand\@writefile{table_#1}{##1 & ##2 & ##3 \\}}
+    }
+
+    \expandafter\newcommand\csname table#1\endcsname
+    {
+        \@starttoc{table_#1}
+    }
+    \makeatother
+}
