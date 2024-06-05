@@ -4,7 +4,7 @@ on:
   push:
     branches:
     - 'master'
-
+  
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -15,10 +15,12 @@ jobs:
     - run: sudo apt update
     - run: sudo apt install -yy imagemagick zip
     - run: ./build-release.sh
+    - run: echo "tag=nightly-$(date -u '+%Y%m%d-%H%M')" >> "$GITHUB_ENV"
     - uses: ncipollo/release-action@v1
       with:
         artifacts: "build/holostreetsLaTeX-overleaf.zip"
-        prerelease: true
+        prerelease: false
         body: "Prerelease build of Holostreets LaTeX"
         commit: "master"
-        tag: "nightly"
+        tag: ${{ env.tag }}
+        makeLatest: true

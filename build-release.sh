@@ -2,7 +2,7 @@
 
 rm -rf build/* || true
 mkdir -p build/holostreetsLaTeX
-cp example/* build/
+cp -r example/* build
 cp -r definitions build/holostreetsLaTeX
 cp -r background build/holostreetsLaTeX
 cp -r *.tex build/holostreetsLaTeX
