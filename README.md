@@ -74,7 +74,7 @@ The following environments are defined:
 
 ## Requirements
 
-The sty file requires the following LaTeX packages: adjustbox, anyfontsize, array, background, colortbl, enumitem, etoc, etoolbox, etoolbox, fancyhdr, float, fontspec, geometry, ifthen, mdframed, multirow, ragged2e, setspace, stfloats, tabularx, tikz, titlesec, titling, transparent, xcolor.
+The sty file requires the following LaTeX packages: adjustbox, anyfontsize, array, background, colortbl, enumitem, etoc, etoolbox, etoolbox, fancyhdr, float, fontspec, geometry, iftex, ifthen, mdframed, multirow, ragged2e, setspace, stfloats, tabularx, tikz, titlesec, titling, transparent, xcolor.
 
 All of these packages are available on CTAN and are included in the default Arch Linux TeX live distribution.
 
