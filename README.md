@@ -72,6 +72,10 @@ The following environments are defined:
 
 `srbigbox` The `figure*` environment, except preformatted, and taking an additional argument, a header.
 
+### Other
+
+We define a new column type, 'Y', for tabularx, which is the 'X' column type except centered.
+
 ## Requirements
 
 The sty file requires the following LaTeX packages: adjustbox, anyfontsize, array, background, colortbl, enumitem, etoc, etoolbox, etoolbox, fancyhdr, float, fontspec, geometry, iftex, ifthen, mdframed, multirow, ragged2e, setspace, stfloats, tabularx, tikz, titlesec, titling, transparent, xcolor.
