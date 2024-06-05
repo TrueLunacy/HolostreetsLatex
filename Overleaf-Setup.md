@@ -6,7 +6,7 @@ This guide assumes you have set up an account on Overleaf, and downloaded the re
 
 ## Project Upload
 
-You can acquire a zipped version of the project [here](https://github.com/TrueLunacy/HolostreetsLatex/releases/tag/nightly). Download the `holstreetsLaTeX-overleaf.zip` file. This is built using the latest code at time of download, but compresses some of the image files to be smaller to avoid file size limits.
+You can acquire a zipped version of the project [here](https://github.com/TrueLunacy/HolostreetsLatex/releases). Download the `holstreetsLaTeX-overleaf.zip` file. This is built using the latest code at time of download, but compresses some of the image files to be smaller to avoid file size limits.
 
 Create a new project in Overleaf and use this zip file as the base. Overleaf provides a guide for this [here](https://www.overleaf.com/learn/how-to/Uploading_a_project).
 
