@@ -22,5 +22,5 @@ jobs:
         prerelease: false
         body: "Prerelease build of Holostreets LaTeX"
         commit: "master"
-        tag: $tag
+        tag: ${{ env.tag }}
         makeLatest: true
