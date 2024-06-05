@@ -2,4 +2,6 @@
 @default_files = ('main.tex');
 
 # Used to clean up collections.
-$clean_ext = "table";
+@sr_table_files = map { /.*\.(.*\.table)/ ? $1 : die("table search regexp somehow failed") } glob "*.*.table";
+
+$clean_ext = join(" ", @sr_table_files);
