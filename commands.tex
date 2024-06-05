@@ -81,63 +81,7 @@
     \combatspell{#1}{#2}{#3}{#4}{}{#5}{#6}{#7}
 }
 
-%- name
-%- Cost
-%- availability
-%- notes
-\newcommand{\weapon}[4]
-{}
-
-%- name
-%- capacity
-%- Cost
-%- availability
-\newcommand{\sritem}[4]
-{}
-
-%- Name
-%- Features
-%- Armour
-%- Capacity
-%- Cost
-%- Availability
-\newcommand{\featurearmour}[6]
-{}
-
-\newenvironment{itemcategory}[1]
-{}
-{}
-
-%- Name
-%- Armour
-%- Capcity
-%- Cost
-%- Availability
-\newcommand{\armour}[5]
-{}
-
-%- Name
-%- Essence
-%- Capacity
-%- Cost
-%- Availability
-\newcommand{\cyberware}[5]
-{}
-
-%- Name
-%- Essence
-%- Cost
-%- Availability
-\newcommand{\cbioware}[4]
-{}
-
-%- Name
-%- Essence
-%- Capacity
-%- Cost
-%- Availability
-\newcommand{\cyberlimb}[5]
-{}
+\newcommand{\yen}{¥}
 
 \newcommand{\todo}[1]{{\color{red}\textbf{TODO: #1}}}
 
@@ -218,6 +162,17 @@
 {
         \end{mdframed}
     \end{figure*}
+}
+
+
+\newdimen\scratch@dimen
+% helper for multicolumn
+% first arg: total number of columns
+% second arg: content
+% handles calculating the width
+\newcommand{\wholerow}[2]
+{
+    \multicolumn{#1}{>{\scratch@dimen=\dimexpr\textwidth-2\arraycolsep\relax\hsize=\scratch@dimen}X}{#2}
 }
 
 \input{collections}

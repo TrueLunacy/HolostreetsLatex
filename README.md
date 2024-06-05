@@ -6,11 +6,11 @@ A guide to use this template on Overleaf can be found in `Overleaf-Setup.md`
 
 ## Use
 
-This package uses the transparent package supported by pdfTeX and LuaTeX, as well as the fontspec package supported by XeTeX and luaTeX. luaTeX is therefore recommended.
+This package uses lua script features. LuaTeX is required to use this class.
 
-This package overrides the default `\maketitle` and `\tableofcontents` commands. The `\tableofcontents` command will automatically begin numbering after the table of contents. If you don't want to use the table of contents, use `\beginnumbering` to begin numbering.
+This package overrides the default `\maketitle` and `\tableofcontents` commands. The `\tableofcontents` command will automatically begin numbering after the table of contents. If you don't want to use the table of contents, use `\beginnumbering` to begin numbering manually.
 
-You can override the title image by redefining the `\titleimage` command.
+You can override the title image by redefining the `\titleimage` command, to a file path for the image you wish to use..
 
 You can remove the logo for Catalyst Game Labs from the title page by using the `titlepage-no-cgl` class option.
 
@@ -44,7 +44,7 @@ This template uses five fonts. You can override the font setup as follows.
 
 The following commands are defined:
 
-`\tableheader{header}`
+`\tableheader{header}` Formats text for use as a heading in a table.
 
 `\quality{title}{cost}{details}`
 
@@ -57,6 +57,10 @@ The following commands are defined:
 `\todo{text}`
 
 `\matrixaction{name}{subheader}{content}`
+
+`\yen` In case you get lazy about copying ¥ around and don't have a key on your keyboard
+
+`\wholerow{columns}{content}` Helper method for spanning a whole row in a tabularx environment. Specify the number of columns as the first argument, and your row content as the second.
 
 ### Environments
 
@@ -74,7 +78,23 @@ The following environments are defined:
 
 ### Collections
 
-A new, special command is defined, `\newcollection{name}{arguments}{tabular columns}{first row}` that is intended for use in generating tables. 
+A new, special command is defined, `\newcollection{<name>}{columns}{column specification}` that is intended for use in generating tables. This command will define a number of new commands, useful for generating tables for weapons, items, ware and more.
+
+The `<name>` argument in the command defines the base name of the helper commands. Unlike newcommand, it should not be given with a slash. The `columns` argument is the number of columns in the table, it also specifies the number of arguments in some of the helper commands. The column specification is the specification as given in tabularx. The tabularx environment created will have its width set to \textwidth, and is intended for use in the `srsmalltable` or  `srbigtable` environments.
+
+There are five additional commands defined.
+
+`\<name>` with `columns` arguments. Each argument corresponds to a single cell, the whole command defines a row.
+
+`\<name>Header`with `columns` arguments. Each value is surrounded by a `\tableheader{...}`, to define headers.
+
+`\<name>WholeRow` with 1 argument. This value is set over the entire row.
+
+`\<name>RowDirect` with 1 argument. The value is set as an entire row in the tabularx environment, with no preprocessing. A `\\` is set at the end of the value, otherwise you can use this to do anything you'd like in the tabularx environment.
+
+`\<name>TableOut` with no arguments. This prints the entire table as defined.
+
+The example document has examples of this command in action.
 
 ## Requirements
 

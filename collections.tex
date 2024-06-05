@@ -1,11 +1,11 @@
 \begin{luacode*}
-function outputLineCommand(name, numOfArgs)
+function outputLineCommand(name, commandSuffix, numOfArgs, argLeft, argRight)
     local t = {}
     for x=1,numOfArgs do
-        t[x] = "#" .. x
+        t[x] = argLeft .. "#" .. x .. argRight
     end
     local outputline = table.concat(t, " & ") .. "\\\\"
-    local str = "\\makeatletter\\newcommand{\\" .. name .. "}[" .. numOfArgs .. "]{"
+    local str = "\\makeatletter\\newcommand{\\" .. name .. commandSuffix .. "}[" .. numOfArgs .. "]{"
         .. "\\immediate\\write\\@auxout{\\detokenize{\\@writefile{" .. name .. ".table}{"
         .. outputline
         .. "}}}}\\makeatother"
@@ -18,13 +18,21 @@ end
 % second - how many arguments
 % third - tabular column specifier
 % fourth - first row (for column names)
-\newcommand{\newcollection}[4]
+\newcommand{\newcollection}[3]
 {
     \immediate\write\@auxout{\detokenize{\@writefile{#1.table}{\begin{tabularx}{\textwidth}{#3}}}}
-    \immediate\write\@auxout{\noexpand\@writefile{#1.table}{#4 \string\\}}
     \AtEndDocument{\immediate\write\@auxout{\detokenize{\@writefile{#1.table}{\end{tabularx}}}}}
 
-    \luadirect{outputLineCommand("#1", #2)}
+    \luadirect{outputLineCommand("#1", "", #2, "", "")}
+    \luadirect{outputLineCommand("#1", "Header", #2, "\string\\tableheader{", "}")}
+    \expandafter\newcommand\csname #1RowDirect\endcsname[1]
+    {
+        \immediate\write\@auxout{\detokenize{\@writefile{#1.table}{##1 \\}}}
+    }
+    \expandafter\newcommand\csname #1WholeRow\endcsname[1]
+    {
+        \immediate\write\@auxout{\detokenize{\@writefile{#1.table}{\wholerow{#2}{##1} \\}}}
+    }
 
     \expandafter\newcommand\csname #1TableOut\endcsname
     {
