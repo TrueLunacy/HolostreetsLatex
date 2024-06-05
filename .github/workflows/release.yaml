@@ -15,12 +15,12 @@ jobs:
     - run: sudo apt update
     - run: sudo apt install -yy imagemagick zip
     - run: ./build-release.sh
-    - run: echo "CURRENT_DATE=$(date -u '+%Y%m%d-%H%M')" >> "$GITHUB_ENV"
+    - run: echo "tag=nightly-$(date -u '+%Y%m%d-%H%M')" >> "$GITHUB_OUTPUT"
     - uses: ncipollo/release-action@v1
       with:
         artifacts: "build/holostreetsLaTeX-overleaf.zip"
-        prerelease: true
+        prerelease: false
         body: "Prerelease build of Holostreets LaTeX"
         commit: "master"
-        tag: "nightly-$CURRENT_DATE"
+        tag: ${{ steps.step5.outputs.tag }}
         makeLatest: true
