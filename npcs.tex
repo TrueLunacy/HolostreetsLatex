@@ -1,0 +1,106 @@
+\newcommand{\srsixstats}[5]
+{
+    \begin{center}
+    \begin{tabular}{ccccc}
+        \rowcolor{tablebackground2}
+        \tableheader{DR} & \tableheader{I/ID} & \tableheader{AC} & \tableheader{CM} & \tableheader{MOVE} \\
+        \rowcolor{tablebackground}
+        #1 & #2 & #3 & #4 & #5
+    \end{tabular}
+    \end{center}
+}
+
+\newcommand{\@statlineNine}[9]
+{
+    \begingroup
+    \setlength{\tabcolsep}{0pt}
+    \begin{tabularx}{\textwidth}{YYYYYYYYY}
+        \rowcolor{tablebackground2}
+        \tableheader{B} & \tableheader{A} & \tableheader{R} & \tableheader{S} & \tableheader{W} & \tableheader{L} & \tableheader{I} & \tableheader{C} & \tableheader{ESS} \\
+        \rowcolor{tablebackground}
+        #1 & #2 & #3 & #4 & #5 & #6 & #7 & #8 & #9 \\
+    \end{tabularx}
+    \endgroup
+}
+
+\newcommand{\@statlinerelay}[9]
+{
+    \begingroup
+    \setlength{\tabcolsep}{0pt}
+    \begin{tabularx}{\textwidth}{YYYYYYYYYY}
+        \rowcolor{tablebackground2}
+        \tableheader{B} & \tableheader{A} & \tableheader{R} & \tableheader{S} & \tableheader{W} & \tableheader{L} & \tableheader{I} & \tableheader{C} & \tableheader{ESS} & \tableheader{\@tmptwo}\\
+        \rowcolor{tablebackground}
+        \@tmp & #1 & #2 & #3 & #4 & #5 & #6 & #7 & #8 & #9 \\
+    \end{tabularx}
+    \endgroup
+}
+
+\newcommand{\@statlineTen}[2]
+{
+    \def\@tmp{#1}
+    \def\@tmptwo{#2}
+    \@statlinerelay
+}
+
+\newenvironment{sr5properties}
+{
+    \begingroup
+    \newcommand{\property}[2]{\cellcolor{tablebackground2}\textbf{##1} & \multicolumn{2}{>{\hsize=2\hsize}X}{\cellcolor{tablebackground}##2} \\}
+    \tabularx{\textwidth}{XXX}
+}
+{
+    \endtabularx
+    \endgroup
+}
+
+\mdfdefinestyle{statblock@srfive}{backgroundcolor=tablebackground, hidealllines=true, innertopmargin=0pt, innerbottommargin=0pt, innerleftmargin=0pt, innerrightmargin=0pt, nobreak=true}
+\mdfdefinestyle{statblock@srsix}{backgroundcolor=tablebackground, hidealllines=true, innertopmargin=8pt, innerbottommargin=8pt, innerleftmargin=8pt, innerrightmargin=8pt, nobreak=true}
+
+\newenvironment{statblock@internal}[1][NONE]
+{
+    \ifthenelse{\equal{#1}{NONE}}
+    {
+        \gdef\statline##1##2##3##4##5##6##7##8##9{\@statlineNine##1##2##3##4##5##6##7##8##9}
+    }
+    {
+        \gdef\statline##1{\@statlineTen##1#1}
+    }
+
+    \ifthenelse{\isundefined{\@nomargin}}
+    {
+        \gdef\mdframedopt{statblock@srsix}
+    }
+    {
+        \gdef\mdframedopt{statblock@srfive}
+    }
+    \begin{mdframed}[style=\mdframedopt]
+        \setlength\parindent{0pt}
+        \tablefont
+        \footnotesize
+        
+        \begin{flushleft}
+}
+{
+        \end{flushleft}
+    \end{mdframed}
+}
+
+\newenvironment{statblock}
+{
+    \begin{statblock@internal}
+}
+{
+    \end{statblock@internal}
+}
+
+\newenvironment{statblock*}
+{
+    \begingroup
+    \def\@nomargin{}
+    \begin{statblock@internal}
+}
+{
+    \end{statblock@internal}
+    \endgroup
+}
