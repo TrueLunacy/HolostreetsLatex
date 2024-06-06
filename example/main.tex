@@ -126,4 +126,134 @@ Matrix Actions are rendered as subsubsections, and will appear in the table of c
     You hack their device, so that all their base are belong to you.
 }
 
+\chapter{Statblocks}
+\section{Fifth Edition Statblocks}
+\subsection{Regular Statblock}
+
+\begin{statblock*}
+    \statline{3}{3 (4)}{3}{3}{3}{3}{3}{3}{5.5}
+    \begin{sr5properties}
+        \property{Initiative}{6+1d6}
+        \property{Condition Monitor}{10}
+        \property{Limits}{Physical 4, Mental 4, Social 5}
+        \property{Armor}{15}
+        \property{Skills}{Etiquette (Being Cool) 3 (+2), Automatics 6}
+        \property{Augmentation}{Super Arms (+1 Agility)}
+        \property{Gear}{Cool Leather Jacket [15]
+        
+        Cool Gun [SMG, Acc 4 (5), DV 7P, AP —, SA/BF/FA, RC 2 (3), 30 (c)]
+        
+        Cool commlink (Device Rating 3)        
+        }
+    \end{sr5properties}
+\end{statblock*}
+
+% fills the rest of the column to push the text down onto the next column
+\vfill
+
+\subsection{Special Statblock}
+
+\begin{statblock*}
+    \statlineSpecial{4}{4}{4}{4}{4}{4}{4}{4}{6}{M}{6}
+    \begin{sr5properties}
+        \property{Initiative}{8+1d6}
+        \property{Condition Monitor}{10}
+        \property{Limits}{Physical 6, Mental 6, Social 6}
+        \property{Armor}{15}
+        \property{Skills}{Etiquette (Being Cool) 3 (+2), Automatics 6, Spellcasting 6}
+        \property{Qualities}{Magician}
+        \property{Spells}{Fireball, Super Fireball}
+        \property{Gear}{Cool Leather Jacket [15]
+        
+        Cool Gun [SMG, Acc 4 (5), DV 7P, AP —, SA/BF/FA, RC 2 (3), 30 (c)]
+        
+        Cooler commlink (Device Rating 4)        
+        }
+    \end{sr5properties}
+\end{statblock*}
+
+\vfill
+
+\subsection{Special + Edge Statblock}
+
+\begin{statblock*}
+    \statlineDoubleSpecial{4}{4}{4}{4}{4}{4}{4}{4}{6}{RES}{6}{EDG}{4}
+    \begin{sr5properties}
+        \property{Initiative}{8+1d6}
+        \property{Matrix Initiative (Hot Sim)}{8+4d6}
+        \property{Condition Monitor}{10}
+        \property{Limits}{Physical 6, Mental 6, Social 6}
+        \property{Armor}{15}
+        \property{Skills}{Etiquette (Being Cool) 3 (+2), Automatics 6, Software 6}
+        \property{Qualities}{Technomancer}
+        \property{Gear}{Cool Leather Jacket [15]
+        
+        Cool Gun [SMG, Acc 4 (5), DV 7P, AP —, SA/BF/FA, RC 2 (3), 30 (c)]
+        
+        Coolest commlink (Device Rating 6)        
+        }
+        \property{Complex Forms}
+        {
+            Fireball (Digital)
+        }
+        \property{Living Persona}{Attack 4, Sleaze 4, Data Processing 4, Firewall 4, Device Rating 6}
+    \end{sr5properties}
+\end{statblock*}
+
+\section{Sixth Edition Statblocks}
+
+% I don't actually play 6th edition, so I don't know if these statblocks are 100% rules accurate, sorry!
+\subsection{Regular Statblock}
+
+\begin{statblock}
+    \statblockHeader{Cool Guy}
+    \statline{3}{3 (4)}{3}{3}{3}{3}{3}{3}{5.5}
+    \srsixstats{8}{6/1}{A1, I2}{10}{10/15/+1}
+    \begin{sr6properties}
+        \property{Skills}{Influence 3 (Etiquette +2), Firearms 6}
+        \property{Augmentation}{Super Arms (+1 Agility)}
+        \property{Gear}{Cool Leather Jacket (+5), Cool commlink (Device Rating 3)}
+        \begin{weaponlist}
+            \item Cool Gun [Submachine Gun, DV 4P, SA/BF, Attack Ratings 10/10/8/—/—]
+        \end{weaponlist}
+    \end{sr6properties}
+\end{statblock}
+
+\vfill
+
+\subsection{Special Statblock}
+
+\begin{statblock}
+    \statblockHeader{Cooler Guy}
+    \statlineSpecial{4}{4}{4}{4}{4}{4}{4}{4}{6}{M}{6}
+    \srsixstats{9}{8/1}{A1, I2}{10}{10/15/+1}
+    \begin{sr6properties}
+        \property{Skills}{Influence 3 (Etiquette +2), Firearms 6, Sorcery 6}
+        \property{Qualities}{Magician}
+        \property{Gear}{Cool Leather Jacket (+5), Cooler commlink (Device Rating 4)}
+        \begin{weaponlist}
+            \item Cool Gun [Submachine Gun, DV 4P, SA/BF, Attack Ratings 10/10/8/-/-]
+        \end{weaponlist}
+        \property{Spells}{Fireball, Super Fireball}
+    \end{sr6properties}
+\end{statblock}
+
+\subsection{Special + Edge Statblock}
+
+\begin{statblock}
+    \statblockHeader{Coolest Guy}
+    \statlineDoubleSpecial{4}{4}{4}{4}{4}{4}{4}{4}{6}{RES}{6}{EDG}{4}
+    \srsixstats{9}{8/1}{A1, I2}{10}{10/15/+1}
+    \begin{sr6properties}
+        \property{Skills}{Influence 3 (Etiquette +2), Firearms 6, Tasking 6}
+        \property{Qualities}{Technomancer}
+        \property{Gear}{Cool Leather Jacket (+5), Coolest commlink (Device Rating 6)}
+        \begin{weaponlist}
+            \item Cool Gun [Submachine Gun, DV 4P, SA/BF, Attack Ratings 10/10/8/-/-]
+        \end{weaponlist}
+        \property{Complex Forms}{Fireball (Digital)}
+    \end{sr6properties}
+\end{statblock}
+
+
 \end{document}
