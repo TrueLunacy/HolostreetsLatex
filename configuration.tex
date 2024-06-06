@@ -23,11 +23,11 @@
 
 \newcommand{\@nullify}[1]{}
 
-\titleformat{\chapter}[display]{\centering\color{chaptercolor}\fontsize{60pt}{70pt}\headerfont}{}{0pt}{\@nullify}
+\titleformat{\chapter}[display]{\hyphenpenalty=10000\centering\color{chaptercolor}\fontsize{60pt}{70pt}\headerfont}{}{0pt}{\@nullify}
 \titlespacing{\chapter}{0pt}{130pt}{90pt}
-\titleformat{\section}[hang]{\color{sectioncolor}\headerfont\huge\RaggedRight}{}{0pt}{\MakeUppercase}[\ifdefined\@headerrule\hrule\fi]
-\titleformat{\subsection}[hang]{\color{subsectioncolor}\headerfont\Large\RaggedRight}{}{0pt}{\MakeUppercase}[\ifdefined\@headerrule\hrule\fi]
-\titleformat{\subsubsection}[hang]{\color{subsectioncolor}\headerfont\normalsize\RaggedRight}{}{0pt}{\MakeUppercase}[\ifdefined\@headerrule\hrule\fi]
+\titleformat{\section}[hang]{\hyphenpenalty=10000\color{sectioncolor}\headerfont\huge\RaggedRight}{}{0pt}{\MakeUppercase}[\ifdefined\@headerrule\hrule\fi]
+\titleformat{\subsection}[hang]{\hyphenpenalty=10000\color{subsectioncolor}\headerfont\Large\RaggedRight}{}{0pt}{\MakeUppercase}[\ifdefined\@headerrule\hrule\fi]
+\titleformat{\subsubsection}[hang]{\hyphenpenalty=10000\color{subsectioncolor}\headerfont\normalsize\RaggedRight}{}{0pt}{\MakeUppercase}[\ifdefined\@headerrule\hrule\fi]
 \titlespacing{\section}{0pt}{8pt plus 8pt minus 8pt}{\@postheaderlength}
 \titlespacing{\subsection}{0pt}{8pt plus 8pt minus 8pt}{\@postheaderlength}
 \titlespacing{\subsubsection}{0pt}{8pt plus 8pt minus 8pt}{\@postheaderlength}
