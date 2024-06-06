@@ -72,6 +72,30 @@ The following environments are defined:
 
 `srbigbox` The `figure*` environment, except preformatted, and taking an additional argument, a header.
 
+### NPC Statboxes
+
+Two new environments are defined, `statblock` and `statblock*`. The non-starred version has a margin, intended for use with SR6-style statblock, while the starred version has no margins, intended to emulate a SR5-style statblock.
+
+Inside the statblock environment, there are a number of useful commands and environments.
+
+There are several commands for stat arrays: `\statline`, `\statlineSpecial` and `\statlineDoubleSpecial`. All of these define a stat array, and should be used as the first command within a statblock.
+
+`\statline` takes nine arguments, in order: Body, Agility, Reaction, Strength, Willpower, Logic, Intuition, Charisma and Essence.
+
+`\statlineSpecial` takes eleven arguments: all nine from `\statline`, then two more: the name of the special attribute, and the special attribute itself.
+
+`\statlineDoubleSpecial` takes thirteen arguments: all nine from `\statline`, a special attribute name, the special attribute value, a second special attribute name, and a second special attribute value.
+
+`\srsixstats` is used for 6th edition's secondary statline, and takes five arguments: the defence rating, the initiative rank/dice, the action allotment, the condition monitor, and movement. It's intended for use in the margin form of the statblock only.
+
+`\statblockHeader` takes one argument, which is typeset as a header. It is not added to the table of contents, and is intended for use in the margin form of the statblock only.
+
+The `sr5properties` environment sets up statblock properties in a 5th edition-esque style. Inside the environment, use the `\property` command, which takes two arguments: the name of the property, and the value. This environment is intended for use with the no-margin form of the statblock only.
+
+The `sr6properties` environment sets up statblock properties in a 6th edition-esque style. Inside the environment, use the `\property` command, which works like the 5th-edition version: it takes two arguments, the name, and the value. In this environment, you can also use the `weaponlist` environment, working like a standard LaTeX list: use \item to prepend every item in the list. This environment is intended for use in the margin form of the statblock only.
+
+Examples for both forms of statblocks are available in the example document.
+
 ### Other
 
 We define a new column type, 'Y', for tabularx, which is the 'X' column type except centered.
