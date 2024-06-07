@@ -33,6 +33,69 @@
 \titlespacing{\subsubsection}{0pt}{8pt plus 8pt minus 8pt}{\@postheaderlength}
 
 
+\newcommand{\leftoddmark}
+{
+
+    %\expandafter\ifblank{\FirstMark{chapter}}
+    %    {No Chapter}
+    %    {Yes Chapter - '\FirstMark{chapter}'}
+    %\def\HUH{huh}
+    %\ifthenelse{\equal{\HUH}{FUCK}}
+    %{
+    %}
+    %{
+    %    
+    %}
+    %\ifthenelse{\equal{WHAT}{FUCK}}
+    %    {No Chapter}
+    %    {Chapter}
+
+    %\IfMarksEqualTF{section}{top}{first}
+    %\ifstrempty{\FirstMark{chapter}}
+    %{
+    %    No Chapter
+        %\ifthenelse{\equal{\LastMark{section}}{}}
+        %{ %both are empty, do nothing
+    %
+        %}
+        %{ % we have section but not chapter
+        %    \large\LastMark{section}
+        %}
+    %}
+    %{
+        %\ifthenelse{\equal{\LastMark{section}}{}}
+        %{ % we have chapter but not section
+        %    \FirstMark{chapter}
+        %}
+        %{ % we have both
+        %    \FirstMark{chapter}\space//\space\large\LastMark{section}
+        %}
+    %}
+}
+%
+%\newcommand{\rightevenmark}
+%{
+%    \ifthenelse{\equal{\FirstMark{chapter}}{}}
+%    {
+%        \ifthenelse{\equal{\LastMark{section}}{}}
+%        { %both are empty, do nothing
+%
+%        }
+%        { % we have section but not chapter
+%            \large\LastMark{section}
+%        }
+%    }
+%    {
+%        \ifthenelse{\equal{\LastMark{section}}{}}
+%        { % we have chapter but not section
+%            \FirstMark{chapter}
+%        }
+%        { % we have both
+%            \large\LastMark{section}\space//\space\normalsize\FirstMark{chapter}
+%        }
+%    }
+%}
+
 \AtBeginDocument{
     \pagenumbering{arabic}
     \InsertMark{isChapter}{0}
@@ -42,8 +105,8 @@
     \fancypagestyle{plain}
     {
         \fancyhf{}
-        \fancyfoot[LO]{\headerfont\color{corecolor}\MakeUppercase{\FirstMark{chapter}\space//\space\large\LastMark{section}}}
-        \fancyfoot[RE]{\headerfont\color{corecolor}\MakeUppercase{\large\LastMark{section}\space//\space\normalsize\FirstMark{chapter}}}
+        \fancyfoot[LO]{\headerfont\color{corecolor}\MakeUppercase{\leftoddmark}}
+        \fancyfoot[RE]{\headerfont\color{corecolor}\MakeUppercase{\leftoddmark}}
     }
 
     \fancypagestyle{titlepage}[plain]
