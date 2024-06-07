@@ -26,7 +26,7 @@ If no options are specified, the default options are `purple`, `logo-6e`, and `f
 
 `openany` as an option is supported, which allows chapters to open on any page. The default is `openright`, which forces chapters to only open on right pages, as if the file was a book.
 
-`no-images` as an option removes rendering images from the output. This can speed up compilation times, but isn't suitable for a final publish.
+`no-images` as an option removes rendering images from the output. This can speed up compilation times, but isn't suitable for a final publish. This will not affect the placement of any main text, but other parts of the document (page counter, chapter name) may be slightly off as compared to a final build.
 
 An example LaTeX file is provided in the example folder, showcasing the features of this class file.
 
