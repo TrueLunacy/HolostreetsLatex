@@ -6,6 +6,8 @@
         \else
         \includegraphics[width=\paperwidth,height=\paperheight]{\@imageLocation{background-right.png}}
         \fi
+    \else
+        \colorbox[gray]{0.97}{\vbox to \paperheight{\vfil\hbox to \paperwidth{}\vfil}}
     \fi
     };
     \begin{pgfinterruptboundingbox}
@@ -14,13 +16,18 @@
             {
                 \ifx\@noimage\undefined
                     \includegraphics[width=\paperwidth]{\@imageLocation{chapter-intro.png}}
+                \else
+                    \colorbox[gray]{0.1}{\vbox to 0.7\paperwidth{\vfil\hbox to \paperwidth{}\vfil}}
                 \fi
             };
-            \ifx\@noimage\undefined
-                \node (logo) [below=2.5cm of chapter.north]{{\includegraphics[height=10.5cm]{\@logo}}};
-            \else
-                \node (logo) at (0, 0) {};
-            \fi
+            \node (logo) [below=2.5cm of chapter.north]
+            {
+                \ifx\@noimage\undefined
+                    {\includegraphics[height=10.5cm]{\@logo}}
+                \else
+                    {\transparent{0.2}\colorbox{corecolor}{\vbox to 10.5cm{\vfil\hbox to 11.32cm{}\vfil}}}
+                \fi            
+            };
             \node (chaptertext) [below=-3cm of logo.south] 
             {
                 \parbox{17cm}
@@ -39,13 +46,17 @@
             {
                 \ifx\@noimage\undefined
                     \includegraphics[width=\paperwidth]{\@imageLocation{chapter-intro.png}}
+                \else
+                    \colorbox[gray]{0.1}{\vbox to 0.7\paperwidth{\vfil\hbox to \paperwidth{}\vfil}}
                 \fi
             };
             \node (logo) [above right=-0.8cm and 1cm of chapter.south west]
             {
                 \ifx\@noimage\undefined
-                    \includegraphics[width=4cm]{\@logo}
-                \fi
+                    \includegraphics[height=4cm]{\@logo}
+                \else
+                    {\transparent{0.2}\colorbox{corecolor}{\vbox to 4cm{\vfil\hbox to 4.31cm{}\vfil}}}
+                \fi   
             };
             \ifodd\LastMark{drawPageNumber}
                 \node (pageanchor) [shape=coordinate, above left=2.3cm and 2.5cm of chapter.south east]{};
