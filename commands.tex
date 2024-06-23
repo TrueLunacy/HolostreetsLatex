@@ -56,14 +56,14 @@
     \vspace{-\@postheaderlength}
     \def\@headerrule{}
     \begin{FlushLeft}
-        {\small\headerfont\MakeUppercase{#2}}
-        \vspace{2pt plus 2pt minus 2pt}
+        \ifstrempty{#2}{}{{\small\headerfont\MakeUppercase{#2}}}
+        \vspace{2pt plus 2pt}
         \hrule
         \vspace{2pt plus 2pt minus 2pt}
-        \begin{tabular}{lll}
+        \begin{tabularx}{\columnwidth}{XXX}
             \textbf{Type:} #3     & \textbf{Range:} #4  & \ifstrempty{#5}{}{\textbf{Damage:} #5} \\
             \textbf{Duration:} #6 & \textbf{Drain:} #7 &           \\
-        \end{tabular}
+        \end{tabularx}
     \end{FlushLeft}
     
     #8
