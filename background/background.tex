@@ -2,9 +2,13 @@
     \node (background) at (0, 0) {%
     \ifx\@noimage\undefined
         \ifodd\value{page}
-        \includegraphics[width=\paperwidth,height=\paperheight]{\@imageLocation{background-left.png}}
+        % this scaling is fucked for some reason I don't know
+        % we used to use width=\paperwidth and height=\paperheight
+        % but it lead to a weird gap on the right, so we just scale
+        % it up and let the overfill handle it
+        \includegraphics[height=1.01\paperheight]{\@imageLocation{background-left.png}}
         \else
-        \includegraphics[width=\paperwidth,height=\paperheight]{\@imageLocation{background-right.png}}
+        \includegraphics[width=1.01\paperwidth]{\@imageLocation{background-right.png}}
         \fi
     \else
         \colorbox[gray]{0.97}{\vbox to \paperheight{\vfil\hbox to \paperwidth{}\vfil}}
@@ -15,7 +19,8 @@
             \node (chapter) [below=0cm of background.north]
             {
                 \ifx\@noimage\undefined
-                    \includegraphics[width=\paperwidth]{\@imageLocation{chapter-intro.png}}
+                    % same as the background image above
+                    \includegraphics[width=1.01\paperwidth]{\@imageLocation{chapter-intro.png}}
                 \else
                     \colorbox[gray]{0.1}{\vbox to 0.7\paperwidth{\vfil\hbox to \paperwidth{}\vfil}}
                 \fi
@@ -45,7 +50,8 @@
             \node (chapter) [below=-12.5cm of background.north]
             {
                 \ifx\@noimage\undefined
-                    \includegraphics[width=\paperwidth]{\@imageLocation{chapter-intro.png}}
+                    % same as the background image above
+                    \includegraphics[width=1.01\paperwidth]{\@imageLocation{chapter-intro.png}}
                 \else
                     \colorbox[gray]{0.1}{\vbox to 0.7\paperwidth{\vfil\hbox to \paperwidth{}\vfil}}
                 \fi

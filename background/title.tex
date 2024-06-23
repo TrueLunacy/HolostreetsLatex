@@ -16,7 +16,11 @@
                 \fi
             \else
                 \node (background) at (0, 0) {
-                    \includegraphics[width=\paperwidth, height=\paperheight]{\@imageLocation{frontpage.png}}
+                % this scaling is fucked for some reason I don't know
+                % we used to use width=\paperwidth and height=\paperheight
+                % but it lead to a weird gap on the right, so we just scale
+                % it up and let the overfill handle it
+                    \includegraphics[width=1.01\paperwidth]{\@imageLocation{frontpage.png}}
                 };
             \fi
         \else
@@ -82,10 +86,10 @@
     \end{pgfonlayer}
     \ifdefined\@titlepageseamless
         \node (titlebackground-top) [above=-1.375cm of titletext.south] {
-            \includegraphics[width=\paperwidth]{\@imageLocation{chapter-intro.png}}
+            \includegraphics[width=1.01\paperwidth]{\@imageLocation{chapter-intro.png}}
         };
         \node (titlebackground-bottom) [below=-4.5cm of background.south] {
-            \includegraphics[width=\paperwidth,angle=180,origin=c]{\@imageLocation{chapter-intro.png}}
+            \includegraphics[width=1.01\paperwidth,angle=180,origin=c]{\@imageLocation{chapter-intro.png}}
         };
     \fi
     \begin{pgfonlayer}{titleimage}
@@ -99,7 +103,8 @@
                         min size={\paperwidth}{\@titleimageheight},
                         Clip*={0.5\width - 0.5\paperwidth} {0.5\totalheight - 0.5\@titleimageheight}
                         {0.5\width + 0.5\paperwidth} {0.5\totalheight + 0.5\@titleimageheight}
-                    }{
+                    }
+                    {
                         \includegraphics[max size={\paperwidth}{\@titleimageheight}]{\titleimage}
                     }
                 };
