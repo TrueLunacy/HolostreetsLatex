@@ -72,9 +72,9 @@ The following environments are defined:
 
 `srbigtable` The `table*` environment, except preformatted, and taking an additional argument, a header.
 
-`srsmallbox` The `figure` environment, except preformatted, and taking an additional argument, a header.
+`srsmallbox` The `figure` environment, except preformatted, and taking an additional argument, a header. Paragraph indent and paragraph skip are set to use the values set outside of the figure environment.
 
-`srbigbox` The `figure*` environment, except preformatted, and taking an additional argument, a header.
+`srbigbox` The `figure*` environment, except preformatted, and taking an additional argument, a header. Paragraph indent and paragraph skip are set to use the values set outside of the figure environment.
 
 ### Collections
 

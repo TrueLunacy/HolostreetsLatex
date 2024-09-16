@@ -119,6 +119,7 @@
 {
     \begin{table*}[#1]
         \begin{mdframed}[backgroundcolor=tablebackground, hidealllines=true, innertopmargin=12pt, innerbottommargin=12pt]
+            \begin{small}
             \tableheader{\raggedright\Large #2}
             
             \tablefont
@@ -127,15 +128,21 @@
             \rowcolors{1}{tablebackground2}{tablebackground}
 }
 {
+            \end{small}
         \end{mdframed}
     \end{table*}
 }
 
 \newenvironment{srsmallbox}[2][h]
 {
+    \edef\@restorevalues{
+    \parindent=\the\parindent
+    \parskip=\the\parskip
+    }
     \begin{figure}[#1]
         \begin{mdframed}[backgroundcolor=tablebackground, hidealllines=true, innertopmargin=12pt, innerbottommargin=12pt]
             \begin{small}
+            \@restorevalues
             \tableheader{\raggedright\Large #2}
             
             \tablefont
@@ -150,8 +157,14 @@
 
 \newenvironment{srbigbox}[2][h]
 {
+    \edef\@restorevalues{
+    \parindent=\the\parindent
+    \parskip=\the\parskip
+    }
     \begin{figure*}[#1]
         \begin{mdframed}[backgroundcolor=tablebackground, hidealllines=true, innertopmargin=12pt, innerbottommargin=12pt]
+            \begin{small}
+            \@restorevalues
             \tableheader{\raggedright\Large #2}
             
             \tablefont
@@ -160,6 +173,7 @@
             \rowcolors{1}{tablebackground2}{tablebackground}
 }
 {
+            \end{small}
         \end{mdframed}
     \end{figure*}
 }
